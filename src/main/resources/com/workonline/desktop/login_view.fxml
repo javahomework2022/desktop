@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<HBox alignment="CENTER_LEFT" prefHeight="480" prefWidth="800" style="-fx-background-color: white;" styleClass="@mainstyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.workonline.desktop.LoginController">
+    <VBox alignment="TOP_CENTER" prefWidth="300" style="-fx-background-color: aliceblue;">
+        <Label text="协同办公">
+            <font>
+                <Font name="Yuanti SC Regular" size="48.0" />
+            </font>
+            <VBox.margin>
+                <Insets top="80.0" />
+            </VBox.margin>
+        </Label>
+        <Label text="java大作业展示，或者放个口号?">
+            <font>
+                <Font name="Yuanti SC Regular" size="12.0" />
+            </font>
+            <VBox.margin>
+                <Insets top="80" />
+            </VBox.margin>
+        </Label>
+    </VBox>
+    <StackPane alignment="TOP_LEFT">
+        <VBox fx:id="vbox_login" alignment="TOP_CENTER" prefWidth="500" visible="true">
+            <Label text="登 录">
+                <font>
+                    <Font name="Yuanti SC Regular" size="28.0" />
+                </font>
+                <VBox.margin>
+                    <Insets top="80" />
+                </VBox.margin>
+            </Label>
+            <VBox>
+                <VBox.margin>
+                    <Insets left="60" right="60" top="40" />
+                </VBox.margin>
+                <Label text="用户名:">
+                    <font>
+                        <Font name="Yuanti SC Regular" size="16.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets top="10" />
+                    </VBox.margin>
+                </Label>
+                <TextField>
+                    <VBox.margin>
+                        <Insets top="10" />
+                    </VBox.margin>
+                </TextField>
+                <Label text="密码:">
+                    <font>
+                        <Font name="Yuanti SC Regular" size="16.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets top="10" />
+                    </VBox.margin>
+                </Label>
+                <PasswordField>
+                    <VBox.margin>
+                        <Insets top="10" />
+                    </VBox.margin>
+                </PasswordField>
+            </VBox>
+            <StackPane alignment="CENTER_RIGHT" prefWidth="500" VBox.vgrow="ALWAYS">
+                <HBox alignment="CENTER" prefWidth="500" VBox.vgrow="ALWAYS">
+                    <Button onMouseClicked="#btn_login_clicked" styleClass="btn-basic" text="登录">
+
+                    </Button>
+                </HBox>
+                <Hyperlink style="-fx-border-style: none; -fx-border-width: 0;" text="注册" onMouseClicked="#btn_go_register_clicked">
+                    <StackPane.margin>
+                        <Insets right="30" />
+                    </StackPane.margin>
+                    <font>
+                        <Font name="Yuanti SC Regular" size="16.0" />
+                    </font>
+                </Hyperlink>
+            </StackPane>
+        </VBox>
+        <VBox fx:id="vbox_register" alignment="TOP_CENTER" visible="false" >
+            <Label text="注 册">
+                <font>
+                    <Font name="Yuanti SC Regular" size="28.0" />
+                </font>
+                <VBox.margin>
+                    <Insets top="80" />
+                </VBox.margin>
+            </Label>
+            <VBox>
+                <VBox.margin>
+                    <Insets left="60" right="60" top="10" />
+                </VBox.margin>
+                <Label text="请输入用户名:">
+                    <font>
+                        <Font name="Yuanti SC Regular" size="16.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets top="10" />
+                    </VBox.margin>
+                </Label>
+                <TextField>
+                    <VBox.margin>
+                        <Insets top="10" />
+                    </VBox.margin>
+                </TextField>
+                <Label text="请输入密码:">
+                    <font>
+                        <Font name="Yuanti SC Regular" size="16.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets top="10" />
+                    </VBox.margin>
+                </Label>
+                <PasswordField>
+                    <VBox.margin>
+                        <Insets top="10" />
+                    </VBox.margin>
+                </PasswordField>
+                <Label text="请确认密码:">
+                    <font>
+                        <Font name="Yuanti SC Regular" size="16.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets top="10" />
+                    </VBox.margin>
+                </Label>
+                <PasswordField>
+                    <VBox.margin>
+                        <Insets top="10" />
+                    </VBox.margin>
+                </PasswordField>
+            </VBox>
+            <StackPane alignment="CENTER_RIGHT" prefWidth="500" VBox.vgrow="ALWAYS">
+                <HBox alignment="CENTER" prefWidth="500" VBox.vgrow="ALWAYS">
+                    <Button styleClass="btn-basic" text="注册" onMouseClicked="#btn_register_clicked"/>
+                </HBox>
+                <Hyperlink style="-fx-border-style: none; -fx-border-width: 0;" text="返回" onMouseClicked="#btn_go_back_clicked">
+                    <StackPane.margin>
+                        <Insets right="30" />
+                    </StackPane.margin>
+                    <font>
+                        <Font name="Yuanti SC Regular" size="16.0" />
+                    </font>
+                </Hyperlink>
+            </StackPane>
+        </VBox>
+    </StackPane>
+</HBox>
