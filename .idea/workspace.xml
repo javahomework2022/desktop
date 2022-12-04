@@ -5,14 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b58dd343-9bab-4799-ba43-0723404e619c" name="变更" comment="init">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/LoginController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/Program.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/login_view.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/mainstyle.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/EditContainerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/edit_container_view.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/fonts/pingfang.ttf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/HelloController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/hello-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/login_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/login_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/mainstyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/mainstyle.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,11 +42,22 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true"
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/Users/Freeman/Documents/javahomework/desktop/src/main/resources/com/workonline/desktop/fonts",
+    "project.structure.last.edited": "库",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.19425288"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/fonts" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/com/workonline/desktop" />
     </key>
@@ -107,7 +119,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670082850443</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="init">
+      <created>1670083191794</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1670083191794</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

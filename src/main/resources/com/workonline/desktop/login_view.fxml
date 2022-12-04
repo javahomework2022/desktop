@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<HBox alignment="CENTER_LEFT" prefHeight="480" prefWidth="800" style="-fx-background-color: white;" styleClass="@mainstyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.workonline.desktop.LoginController">
+<HBox fx:id="hbox_root" alignment="CENTER_LEFT" prefHeight="480" prefWidth="800" style="-fx-background-color: white;" styleClass="@mainstyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.workonline.desktop.LoginController">
     <VBox alignment="TOP_CENTER" prefWidth="300" style="-fx-background-color: aliceblue;">
         <Label text="协同办公">
             <font>

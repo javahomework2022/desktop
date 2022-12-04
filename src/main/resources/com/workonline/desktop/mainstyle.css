@@ -1,8 +1,8 @@
-/*全局字体样式*/
-.root {
-   -fx-font-size: 14px;
-}
 
+/*全局字体样式*/
+ .root {
+    -fx-font-size: 14px;
+ }
 /*按钮基础样式*/
 .btn-basic {
    /*文本对齐方式*/
@@ -39,6 +39,10 @@
 .btn-radius-large {
    -fx-border-radius: 50px;
    -fx-background-radius: 50px;
+}
+
+.menu-yuan-font {
+    -fx-font-size: 48;
 }
 
 /*默认主题*/
@@ -179,6 +183,8 @@
    -fx-background-color: rgb(40, 43, 51);
    -fx-text-fill: rgb(191, 192, 194);
 }
+
+
 
 /*左侧导航菜单按钮鼠标悬停效果*/
 .menu-btn:hover {
