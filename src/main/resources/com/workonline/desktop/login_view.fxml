@@ -67,11 +67,11 @@
             </VBox>
             <StackPane alignment="CENTER_RIGHT" prefWidth="500" VBox.vgrow="ALWAYS">
                 <HBox alignment="CENTER" prefWidth="500" VBox.vgrow="ALWAYS">
-                    <Button onMouseClicked="#btn_login_clicked" styleClass="btn-basic" text="登录">
+                    <Button onMouseClicked="#btnLoginClicked" styleClass="btn-basic" text="登录">
 
                     </Button>
                 </HBox>
-                <Hyperlink style="-fx-border-style: none; -fx-border-width: 0;" text="注册" onMouseClicked="#btn_go_register_clicked">
+                <Hyperlink style="-fx-border-style: none; -fx-border-width: 0;" text="注册" onMouseClicked="#btnGoRegisterClicked">
                     <StackPane.margin>
                         <Insets right="30" />
                     </StackPane.margin>
@@ -136,9 +136,9 @@
             </VBox>
             <StackPane alignment="CENTER_RIGHT" prefWidth="500" VBox.vgrow="ALWAYS">
                 <HBox alignment="CENTER" prefWidth="500" VBox.vgrow="ALWAYS">
-                    <Button styleClass="btn-basic" text="注册" onMouseClicked="#btn_register_clicked"/>
+                    <Button styleClass="btn-basic" text="注册" onMouseClicked="#btnRegisterClicked"/>
                 </HBox>
-                <Hyperlink style="-fx-border-style: none; -fx-border-width: 0;" text="返回" onMouseClicked="#btn_go_back_clicked">
+                <Hyperlink style="-fx-border-style: none; -fx-border-width: 0;" text="返回" onMouseClicked="#btnGoBackClicked">
                     <StackPane.margin>
                         <Insets right="30" />
                     </StackPane.margin>

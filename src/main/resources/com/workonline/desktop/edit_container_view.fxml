@@ -125,7 +125,7 @@
                 </graphic>
             </MenuItem>
             <SeparatorMenuItem/>
-            <MenuItem text="关于">
+            <MenuItem text="关于" onAction="#menuItemAboutClick">
                 <graphic>
                     <ImageView fitHeight="20" fitWidth="20">
                         <Image url="@icons/about.png"/>

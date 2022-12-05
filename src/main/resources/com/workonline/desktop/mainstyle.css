@@ -2,6 +2,7 @@
 /*全局字体样式*/
  .root {
     -fx-font-size: 14px;
+    -fx-font-family: "PingFang SC";
  }
 /*按钮基础样式*/
 .btn-basic {
@@ -19,6 +20,8 @@
    -fx-font-size : 20;
 
    -fx-background-color: darkturquoise;
+
+   -fx-font-family: "PingFang SC";
 }
 
 /*鼠标覆盖按钮效果*/

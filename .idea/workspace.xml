@@ -4,14 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b58dd343-9bab-4799-ba43-0723404e619c" name="变更" comment="init">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/EditContainerController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/edit_container_view.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/fonts/pingfang.ttf" afterDir="false" />
+    <list default="true" id="b58dd343-9bab-4799-ba43-0723404e619c" name="变更" comment="编辑页面">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/AboutController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/IController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/StageUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/about_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/EditContainerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/EditContainerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/HelloApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/Program.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/edit_container_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/edit_container_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/fonts/pingfang.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/fonts/Miui-Regular.ttf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/login_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/login_view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/mainstyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/mainstyle.css" afterDir="false" />
     </list>
@@ -25,6 +31,7 @@
       <list>
         <option value="FxmlFile" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -33,6 +40,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2IPT6NpMB2AdR2EBh4j1cqfk23s" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -43,6 +53,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Downloaded.Files.Path.Enabled": "false",
+    "OverrideImplement.generate.javadoc": "true",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
     "Repository.Attach.Sources": "false",
@@ -51,7 +62,8 @@
     "last_opened_file_path": "/Users/Freeman/Documents/javahomework/desktop/src/main/resources/com/workonline/desktop/fonts",
     "project.structure.last.edited": "库",
     "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.19425288"
+    "project.structure.side.proportion": "0.19425288",
+    "settings.editor.selected.configurable": "editing.templates"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -126,7 +138,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670083191794</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="编辑页面">
+      <created>1670135093901</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1670135093901</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -142,6 +161,11 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init" />
-    <option name="LAST_COMMIT_MESSAGE" value="init" />
+    <MESSAGE value="编辑页面" />
+    <option name="LAST_COMMIT_MESSAGE" value="编辑页面" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

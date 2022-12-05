@@ -1,53 +1,81 @@
 package com.workonline.desktop;
 
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import com.workonline.util.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Objects;
 
-public class LoginController {
+import static com.workonline.desktop.StageUtils.getStage;
+
+/**
+ * 登录界面的Controll
+ */
+public class LoginController implements IController {
+    /**
+     * login和register页面的VBox
+     */
     @FXML
     VBox vbox_login,vbox_register;
+
+    /**
+     * root
+     */
     @FXML
     HBox hbox_root;
+
+    /**
+     * stage
+     */
     @FXML
-    private void btn_login_clicked() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("edit_container_view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1024, 600);
-        scene.getStylesheets().add(Objects.requireNonNull(HelloApplication.class.getResource("mainstyle.css")).toExternalForm());
-        Stage stage = new Stage();
-        stage.setTitle("协同办公");
-        stage.setScene(scene);
-        stage.setMinHeight(480);
-        stage.setMinWidth(800);
+    Stage stage;
+
+    /**
+     * 登录按钮点击事件
+     * @throws IOException 抛出异常
+     */
+    @FXML
+    private void btnLoginClicked() throws IOException {
+        Stage stage = getStage(1024,600,"edit_container_view.fxml","协同办公",800,480);
         stage.show();
-        var mainstage = (Stage) hbox_root.getScene().getWindow();
-        if(mainstage != null)  mainstage.close();
+        var mainStage = (Stage) hbox_root.getScene().getWindow();
+        if(mainStage != null)  mainStage.close();
     }
 
+    /**
+     * 去注册按钮点击事件
+     */
     @FXML
-    private void btn_go_register_clicked(){
+    private void btnGoRegisterClicked(){
         vbox_login.setVisible(false);
         vbox_register.setVisible(true);
     }
 
+    /**
+     * 注册按钮点击事件
+     */
     @FXML
-    private void btn_register_clicked(){
+    private void btnRegisterClicked(){
 
     }
 
+    /**
+     * 返回登录页面点击事件
+     */
     @FXML
-    private void btn_go_back_clicked(){
+    private void btnGoBackClicked(){
         vbox_login.setVisible(true);
         vbox_register.setVisible(false);
+    }
+
+    /**
+     * 设置stage
+     * @param stage stage
+     */
+    @Override
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }

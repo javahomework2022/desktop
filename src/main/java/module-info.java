@@ -1,3 +1,6 @@
+/**
+ * 模块外显
+ */
 module com.workonline.desktop {
     requires javafx.controls;
     requires javafx.fxml;
