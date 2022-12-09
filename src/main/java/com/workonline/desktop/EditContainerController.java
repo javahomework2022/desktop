@@ -1,10 +1,15 @@
 package com.workonline.desktop;
 
+import com.workonline.util.Message;
 import javafx.fxml.FXML;
-import javafx.scene.control.MenuItem;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.net.Socket;
+import java.util.Map;
 
 import static com.workonline.desktop.StageUtils.getStage;
 
@@ -13,12 +18,18 @@ import static com.workonline.desktop.StageUtils.getStage;
  */
 public class EditContainerController implements IController {
 
-
     /**
-     * 本Controller对应的stage
+     *
+     */
+    ObjectOutputStream objectOutputStream;
+
+    @FXML
+    AnchorPane root;
+    /**
+     * 本Controller对应的stage 单例
      */
     @FXML
-    Stage stage;
+    public static Stage stage;
 
     /**
      * 关于页面的stage，是个单例。
@@ -32,6 +43,8 @@ public class EditContainerController implements IController {
     public EditContainerController() throws IOException {
     }
 
+
+
     /**
      * 关于按钮点击事件
      */
@@ -44,6 +57,13 @@ public class EditContainerController implements IController {
      */
     @Override
     public void setStage(Stage stage) {
+        Socket socket = ((Socket) ((Map) root.getUserData()).get("socket"));
+        try {
+            this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
         this.stage = stage;
     }
 }

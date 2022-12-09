@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -25,6 +26,7 @@ public class StageUtils {
     public static Stage getStage (int width,int height,String xmlpath,String title,int minWidth,int minHeight) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(xmlpath));
         Scene scene = new Scene(fxmlLoader.load(), width, height);
+
         Stage stage = new Stage();
         ((IController) fxmlLoader.getController()).setStage(stage);
         scene.getStylesheets().add(Objects.requireNonNull(HelloApplication.class.getResource("mainstyle.css")).toExternalForm());
@@ -47,5 +49,30 @@ public class StageUtils {
      */
     public static Stage getStage(int width,int height,String xmlpath,String title) throws IOException{
         return getStage(width, height, xmlpath, title,0,0);
+    }
+
+    /**
+     * 带数据传入的获取窗口
+     * @param width
+     * @param height
+     * @param xmlpath
+     * @param title
+     * @param minWidth
+     * @param minHeight
+     * @param userdata 要传入的数据
+     * @return
+     */
+    public static Stage getStage(int width, int height, String xmlpath, String title, int minWidth, int minHeight, Map userdata) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(xmlpath));
+        Scene scene = new Scene(fxmlLoader.load(), width, height);
+        scene.setUserData(userdata);
+        Stage stage = new Stage();
+        ((IController) fxmlLoader.getController()).setStage(stage);
+        scene.getStylesheets().add(Objects.requireNonNull(HelloApplication.class.getResource("mainstyle.css")).toExternalForm());
+        stage.setTitle(title);
+        stage.setScene(scene);
+        stage.setMinHeight(minHeight);
+        stage.setMinWidth(minWidth);
+        return stage;
     }
 }

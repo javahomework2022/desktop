@@ -4,22 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b58dd343-9bab-4799-ba43-0723404e619c" name="变更" comment="编辑页面">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/AboutController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/IController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/StageUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/about_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="b58dd343-9bab-4799-ba43-0723404e619c" name="变更" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/MessageReceiver.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/MessageSender.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/EditContainerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/EditContainerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/HelloApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/Program.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/StageUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/StageUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/edit_container_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/edit_container_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/fonts/pingfang.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/fonts/Miui-Regular.ttf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/login_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/login_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/mainstyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/mainstyle.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,8 +23,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -50,22 +43,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Downloaded.Files.Path.Enabled": "false",
-    "OverrideImplement.generate.javadoc": "true",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/Users/Freeman/Documents/javahomework/desktop/src/main/resources/com/workonline/desktop/fonts",
-    "project.structure.last.edited": "库",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.19425288",
-    "settings.editor.selected.configurable": "editing.templates"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;OverrideImplement.generate.javadoc&quot;: &quot;true&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/Freeman/Documents/javahomework/desktop/src/main/resources/com/workonline/desktop/fonts&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;库&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.19425288&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editing.templates&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/fonts" />
