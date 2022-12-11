@@ -65,11 +65,12 @@ public class EditContainerController implements IController {
             int roomid = Integer.getInteger(commands[1]);
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("editor_tab.fxml"));
             try {
+                EditorTabController controller = fxmlLoader.getController();
                 Tab tab = fxmlLoader.load();
                 var map =new HashMap<String,Object>();
-                map.put("roomid",roomid);
+                map.put("controller",controller);
                 tab.setUserData(map);
-                EditorTabController controller = fxmlLoader.getController();
+                controller.roomid = roomid;
                 controller.label_room_id.setText("房间ID："+roomid);
                 controller.label_room_people.setText("");
                 controller.textArea_editor.textProperty().addListener(controller.textChanged);
@@ -151,7 +152,8 @@ public class EditContainerController implements IController {
 
     public void menuItemQuitRoomClick() throws  IOException{
         Tab tab = tabPane_container.getSelectionModel().getSelectedItem();
-        int roomid = ((Integer) ((Map<?, ?>) tab.getUserData()).get("roomid"));
+
+        int roomid = ((EditorTabController) ((Map<?, ?>) tab.getUserData()).get("controller")).roomid;
         Message message = new Message();
         message.command = "quit_room " + roomid;
         MessageSender.sendMessage(message);
@@ -161,7 +163,20 @@ public class EditContainerController implements IController {
     }
 
     public void menuItemCloseRoomClick() throws IOException{
+        Tab tab = tabPane_container.getSelectionModel().getSelectedItem();
+        EditorTabController controller = (EditorTabController) ((Map) tab.getUserData()).get("controller");
+        boolean is_owner = controller.is_owner;
+        if(!is_owner){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.titleProperty().set("错误");
+            alert.headerTextProperty().set("您不是房主");
+            alert.showAndWait();
+            return;
+        }
 
+        Message message = new Message();
+        message.command = "close_room "+controller.roomid;
+        MessageSender.sendMessage(message);
     }
 
     /**
@@ -182,7 +197,9 @@ public class EditContainerController implements IController {
 
         try {
             Tab tab = fxmlLoader.load();
-            var controller = ((EditorTabController) fxmlLoader.getController());
+            var controller = (EditorTabController) fxmlLoader.getController();
+            var map = new HashMap<String,Object>();
+            map.put("controller",controller);
             controller.textArea_editor.textProperty().addListener(controller.textChanged);
             tabPane_container.getTabs().add(tab);
         } catch (IOException e) {

@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 public class EditorTabController {
 
     public boolean is_owner = false;
+    public int roomid = 0;
 
     @FXML
     public Tab root;
