@@ -66,9 +66,13 @@ public class EditContainerController implements IController {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("editor_tab.fxml"));
             try {
                 Tab tab = fxmlLoader.load();
+                var map =new HashMap<String,Object>();
+                map.put("roomid",roomid);
+                tab.setUserData(map);
                 EditorTabController controller = fxmlLoader.getController();
                 controller.label_room_id.setText("房间ID："+roomid);
                 controller.label_room_people.setText("");
+                controller.textArea_editor.textProperty().addListener(controller.textChanged);
                 tabPane_container.getTabs().add(tab);
                 tab_list.put(roomid,tab);
             } catch (IOException e) {
@@ -147,6 +151,16 @@ public class EditContainerController implements IController {
 
     public void menuItemQuitRoomClick() throws  IOException{
         Tab tab = tabPane_container.getSelectionModel().getSelectedItem();
+        int roomid = ((Integer) ((Map<?, ?>) tab.getUserData()).get("roomid"));
+        Message message = new Message();
+        message.command = "quit_room " + roomid;
+        MessageSender.sendMessage(message);
+        tabPane_container.getTabs().remove(tab);
+        tab_list.remove(roomid);
+
+    }
+
+    public void menuItemCloseRoomClick() throws IOException{
 
     }
 
@@ -168,7 +182,8 @@ public class EditContainerController implements IController {
 
         try {
             Tab tab = fxmlLoader.load();
-
+            var controller = ((EditorTabController) fxmlLoader.getController());
+            controller.textArea_editor.textProperty().addListener(controller.textChanged);
             tabPane_container.getTabs().add(tab);
         } catch (IOException e) {
             throw new RuntimeException(e);

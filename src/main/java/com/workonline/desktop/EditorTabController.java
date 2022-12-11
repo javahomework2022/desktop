@@ -1,6 +1,9 @@
 package com.workonline.desktop;
 
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
@@ -19,4 +22,13 @@ public class EditorTabController {
 
     @FXML
     public Label label_room_id,label_room_people;
+    public ChangeListener<? super String> textChanged = new ChangeListener<String>() {
+        @Override
+        public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+
+            System.out.println("Text Changed");
+            System.out.println(s);
+            System.out.println(t1);
+        }
+    };
 }

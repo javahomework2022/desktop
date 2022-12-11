@@ -31,7 +31,7 @@
             <TextArea editable="false" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="31" AnchorPane.bottomAnchor="31"/>
         </AnchorPane>
         <AnchorPane AnchorPane.leftAnchor="200" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="100">
-            <TextArea fx:id="textArea_editor" AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" text="Hello">
+            <TextArea fx:id="textArea_editor"  AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" text="Hello">
                 <cursor>
                     <Cursor fx:constant="TEXT"/>
                 </cursor>
