@@ -126,7 +126,7 @@ public class LoginController implements IController {
         PrintStream printStream = null;
         BufferedWriter bw = null;
         try {
-            socket = new Socket(InetAddress.getByName("43.138.44.240"),10099);
+            socket = new Socket(InetAddress.getByName("127.0.0.1"),10099);
         } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.titleProperty().set("提示");
