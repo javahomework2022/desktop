@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<Tab xmlns="http://javafx.com/javafx"
+     xmlns:fx="http://javafx.com/fxml"
+     styleClass="@mainstyle.css"
+     fx:id="root"
+     fx:controller="com.workonline.desktop.EditorTabController" text="NewTab">
+    <AnchorPane>
+        <AnchorPane AnchorPane.leftAnchor="1" AnchorPane.topAnchor="1" AnchorPane.bottomAnchor="1" prefWidth="200">
+            <Pane AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.topAnchor="0" prefWidth="1" style="-fx-background-color:#dadada"/>
+            <Label  text="交流区" AnchorPane.topAnchor="2" AnchorPane.rightAnchor="2" AnchorPane.leftAnchor="5" />
+            <Pane AnchorPane.topAnchor="28" AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0" prefHeight="1" style="-fx-background-color:#dadada"/>
+            <AnchorPane AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0" prefHeight="30">
+                <TextField text="输入文字" AnchorPane.leftAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.topAnchor="0" AnchorPane.rightAnchor="43" prefHeight="30"/>
+                <Button  AnchorPane.topAnchor="0" AnchorPane.rightAnchor="2" AnchorPane.bottomAnchor="0" prefHeight="30" prefWidth="30">
+                    <graphic>
+                        <ImageView fitHeight="20" fitWidth="20">
+                            <Image url="@icons/send.png" />
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </AnchorPane>
+            <TextArea editable="false" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="31" AnchorPane.bottomAnchor="31"/>
+        </AnchorPane>
+        <AnchorPane AnchorPane.leftAnchor="200" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="100">
+            <TextArea fx:id="textArea_editor" AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" text="Hello">
+                <cursor>
+                    <Cursor fx:constant="TEXT"/>
+                </cursor>
+            </TextArea>
+        </AnchorPane>
+        <AnchorPane AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.topAnchor="0" prefWidth="100" style="-fx-background-color:gray;">
+            <VBox alignment="CENTER_LEFT">
+                <Label fx:id="label_room_id" text="房间ID:ID"/>
+                <Label text="房间成员："/>
+                <Label fx:id="label_room_people" text="Freeman&#x000A;Test"/>
+            </VBox>
+        </AnchorPane>
+    </AnchorPane>
+</Tab>

@@ -2,12 +2,14 @@ package com.workonline.desktop;
 
 import com.workonline.util.Message;
 import javafx.application.Platform;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,6 +19,7 @@ import static com.workonline.desktop.StageUtils.getStage;
  * 新建线程用来处理从服务器收到的Message
  */
 public class MessageReceiver implements Runnable {
+    public static HashMap<String,MessageHandle> r_commands = new HashMap<>();
     Socket socket;
     InputStream inputStream;
     public MessageReceiver(Socket socket) throws IOException {
@@ -43,33 +46,22 @@ public class MessageReceiver implements Runnable {
                 Message message = ((Message) objectInputStream.readObject());
                 String command = message.command;
                 String[] commands = command.split(" ");
-                switch (commands[0]){
-                    case "register_success":
-                        Platform.runLater(()->{
-                            Map<String,Object> map = new HashMap<>();
-                            map.put("socket",socket);
-                            Stage stage1 = null;
-                            try {
-                                stage1 = getStage(1024,600,"edit_container_view.fxml","协同办公",800,480,map);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                                throw new RuntimeException(e);
-                            }
-                            stage1.show();
-                            Stage mainStage = LoginController.stage;
-                            if(mainStage != null)  mainStage.close();
-                        });
-                        break;
-
+                if(r_commands.containsKey(commands[0])){
+                    Platform.runLater(()->{
+                        r_commands.get(commands[0]).run(commands,message);
+                    });
+                }else {
+                    System.out.println("unknown command:"+commands[0]);
                 }
             }
         }
-        catch (IOException e){
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
+        catch (IOException | ClassNotFoundException e){
             e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
+}
+
+interface MessageHandle{
+    public abstract void run(String[] commands,Message message);
 }

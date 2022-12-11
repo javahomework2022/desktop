@@ -4,13 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b58dd343-9bab-4799-ba43-0723404e619c" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/MessageReceiver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/MessageSender.java" afterDir="false" />
+    <list default="true" id="b58dd343-9bab-4799-ba43-0723404e619c" name="变更" comment="网路处理">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/EditorTabController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/editor_tab.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/icons/close.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/icons/send.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/EditContainerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/EditContainerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/StageUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/StageUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/MessageReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/MessageReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/MessageSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/workonline/desktop/MessageSender.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/edit_container_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/edit_container_view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/login_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/login_view.fxml" afterDir="false" />
     </list>
@@ -22,8 +25,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="FxmlFile" />
         <option value="Interface" />
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -56,6 +59,7 @@
     &quot;project.structure.last.edited&quot;: &quot;库&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.19425288&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;editing.templates&quot;
   }
 }</component>
@@ -64,6 +68,7 @@
       <recent name="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/fonts" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/com/workonline/desktop/icons" />
       <recent name="$PROJECT_DIR$/src/main/resources/com/workonline/desktop" />
     </key>
   </component>
@@ -138,7 +143,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670135093901</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="网路处理">
+      <created>1670600980416</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1670600980416</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -155,7 +167,19 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init" />
     <MESSAGE value="编辑页面" />
-    <option name="LAST_COMMIT_MESSAGE" value="编辑页面" />
+    <MESSAGE value="网路处理" />
+    <option name="LAST_COMMIT_MESSAGE" value="网路处理" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/workonline/desktop/StageUtils.java</url>
+          <line>66</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

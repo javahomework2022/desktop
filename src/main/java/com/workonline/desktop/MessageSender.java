@@ -9,7 +9,11 @@ import java.io.ObjectOutputStream;
  *
  */
 public class MessageSender {
- public static void sendMessage(Message message, ObjectOutputStream objectOutputStream) throws IOException {
-  objectOutputStream.writeObject(message);
+ public static ObjectOutputStream objectOutputStream;
+ public static void sendMessage(Message message) throws IOException {
+  if(objectOutputStream != null) {
+   objectOutputStream.writeObject(message);
+   objectOutputStream.flush();
+  }
  }
 }

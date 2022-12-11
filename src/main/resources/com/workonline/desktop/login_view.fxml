@@ -46,7 +46,7 @@
                         <Insets top="10" />
                     </VBox.margin>
                 </Label>
-                <TextField>
+                <TextField fx:id="tf_login_username">
                     <VBox.margin>
                         <Insets top="10" />
                     </VBox.margin>
@@ -59,7 +59,7 @@
                         <Insets top="10" />
                     </VBox.margin>
                 </Label>
-                <PasswordField>
+                <PasswordField fx:id="pf_login_password">
                     <VBox.margin>
                         <Insets top="10" />
                     </VBox.margin>
