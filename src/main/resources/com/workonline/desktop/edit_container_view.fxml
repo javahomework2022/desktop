@@ -9,7 +9,7 @@
     <MenuBar prefHeight="30.0" prefWidth="1024.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
 
         <Menu text="房间">
-            <MenuItem text="创建房间">
+            <MenuItem text="创建房间" onAction="#menuItemCreateRoomClick">
                 <graphic>
                     <ImageView fitHeight="20" fitWidth="20">
                         <Image url="@icons/create_home.png" />
@@ -17,7 +17,7 @@
                 </graphic>
             </MenuItem>
             <SeparatorMenuItem />
-            <MenuItem text="加入房间">
+            <MenuItem text="加入房间" onAction="#menuItemEnterRoomClick">
                 <graphic>
                     <ImageView fitHeight="20" fitWidth="20">
                         <Image url="@icons/add_home.png" />
@@ -25,7 +25,7 @@
                 </graphic>
             </MenuItem>
             <SeparatorMenuItem />
-            <MenuItem text="离开房间">
+            <MenuItem text="离开房间" onAction="#menuItemQuitRoomClick">
                 <graphic>
                     <ImageView fitHeight="20" fitWidth="20">
                         <Image url="@icons/exit_home.png" />
@@ -33,7 +33,7 @@
                 </graphic>
             </MenuItem>
             <SeparatorMenuItem />
-            <MenuItem text="关闭房间">
+            <MenuItem text="关闭房间" onAction="#menuItemCloseRoomClick">
                 <graphic>
                     <ImageView fitHeight="20" fitWidth="20">
                         <Image url="@icons/close.png" />
@@ -51,7 +51,7 @@
             </MenuItem>
         </Menu>
         <Menu text="编辑">
-            <MenuItem text="撤销">
+            <MenuItem text="撤销" onAction="#menuItemUndoClick">
                 <graphic>
                     <ImageView fitHeight="20" fitWidth="20">
                         <Image url="@icons/undo.png" />
@@ -59,7 +59,7 @@
                 </graphic>
             </MenuItem>
             <SeparatorMenuItem />
-            <MenuItem text="复制">
+            <MenuItem text="复制" onAction="#menuItemCopyClick">
                 <graphic>
                     <ImageView fitHeight="20" fitWidth="20">
                         <Image url="@icons/copy.png" />
@@ -67,7 +67,7 @@
                 </graphic>
             </MenuItem>
             <SeparatorMenuItem />
-            <MenuItem text="剪切">
+            <MenuItem text="剪切" onAction="#menuItemCutClick">
                 <graphic>
                     <ImageView fitHeight="20" fitWidth="20">
                         <Image url="@icons/cutting.png" />
@@ -75,7 +75,7 @@
                 </graphic>
             </MenuItem>
             <SeparatorMenuItem />
-            <MenuItem text="粘贴">
+            <MenuItem text="粘贴" onAction="#menuItemPasteClick">
                 <graphic>
                     <ImageView fitHeight="20" fitWidth="20">
                         <Image url="@icons/paste.png" />
@@ -125,7 +125,7 @@
             </MenuItem>
         </Menu>
         <Menu text="帮助">
-            <MenuItem text="使用帮助">
+            <MenuItem text="使用帮助" onAction="#menuItemHelpClick">
                 <graphic>
                     <ImageView fitHeight="20" fitWidth="20">
                         <Image url="@icons/help.png" />

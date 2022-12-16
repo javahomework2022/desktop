@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
@@ -73,7 +74,6 @@ public class EditContainerController implements IController {
                 controller.roomid = roomid;
                 controller.label_room_id.setText("房间ID："+roomid);
                 controller.label_room_people.setText("");
-                controller.textArea_editor.textProperty().addListener(controller.textChanged);
                 tabPane_container.getTabs().add(tab);
                 tab_list.put(roomid,tab);
             } catch (IOException e) {
@@ -82,35 +82,39 @@ public class EditContainerController implements IController {
         });
         MessageReceiver.r_commands.put("enter_room_fail",(commands, message) -> {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.titleProperty().set("进入房间失败");
-            alert.headerTextProperty().set("房间号不存在，请检查房间号");
+            alert.setTitle("进入房间失败");
+            alert.setHeaderText(null);
+            alert.setContentText("房间号不存在，请检查房间号");
             alert.showAndWait();
         });
         MessageReceiver.r_commands.put("room_closed",(commands, message) -> {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.titleProperty().set("房间已关闭");
-            alert.headerTextProperty().set("房间已被房主关闭");
+            alert.setTitle("房间已关闭");
+            alert.setHeaderText(null);
+            alert.setContentText("房间已被房主关闭");
             alert.showAndWait();
             int roomid = Integer.getInteger(commands[1]);
             Tab tab = tab_list.get(roomid);
             tabPane_container.getTabs().remove(tab);
-            tab_list.remove(tab);
+            tab_list.remove(roomid);
         });
     }
 
 
     public void menuItemCreateRoomClick() throws IOException {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"提示",new ButtonType("新建文件"),new ButtonType("打开现有文件"));
-        alert.setHeaderText("通过新建文件还是打开现有文件创建房间？");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"",new ButtonType("新建文件"),new ButtonType("打开现有文件"));
+        alert.setHeaderText(null);
+        alert.setContentText("通过新建文件还是打开现有文件创建房间？");
         var ret = alert.showAndWait();
         String filepath;
-        if(ret.get().getText().equals("新建文件")) {
+        if(ret.isPresent() && ret.get().getText().equals("新建文件")) {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("新建文件");
             fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
             File file = fileChooser.showSaveDialog(stage);
             if(file == null) return;
             filepath = file.getPath();
+            Files.createFile(Paths.get(filepath));
         }else {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("选择文本文件");
@@ -130,7 +134,7 @@ public class EditContainerController implements IController {
         MessageSender.sendMessage(message);
     }
 
-    public void menuItemEnterRoomClick() throws IOException {
+    public void menuItemEnterRoomClick() {
         TextInputDialog textInputDialog = new TextInputDialog();
         textInputDialog.setTitle("提示");
         textInputDialog.setHeaderText(null);
@@ -150,7 +154,7 @@ public class EditContainerController implements IController {
 
     }
 
-    public void menuItemQuitRoomClick() throws  IOException{
+    public void menuItemQuitRoomClick() {
         Tab tab = tabPane_container.getSelectionModel().getSelectedItem();
 
         int roomid = ((EditorTabController) ((Map<?, ?>) tab.getUserData()).get("controller")).roomid;
@@ -162,9 +166,9 @@ public class EditContainerController implements IController {
 
     }
 
-    public void menuItemCloseRoomClick() throws IOException{
+    public void menuItemCloseRoomClick() {
         Tab tab = tabPane_container.getSelectionModel().getSelectedItem();
-        EditorTabController controller = (EditorTabController) ((Map) tab.getUserData()).get("controller");
+        EditorTabController controller = (EditorTabController) ((Map<?, ?>) tab.getUserData()).get("controller");
         boolean is_owner = controller.is_owner;
         if(!is_owner){
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -178,6 +182,53 @@ public class EditContainerController implements IController {
         message.command = "close_room "+controller.roomid;
         MessageSender.sendMessage(message);
     }
+
+    public void menuItemHelpClick(){
+        var res = System.getProperties();
+        for (var i : res.keySet()) {
+            System.out.println(i+":"+res.get(i));
+        }
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("editor_tab.fxml"));
+
+        try {
+            Tab tab = fxmlLoader.load();
+            var controller = (EditorTabController) fxmlLoader.getController();
+            var map = new HashMap<String,Object>();
+            map.put("controller",controller);
+            tab.setUserData(map);
+            controller.textArea_editor.textProperty().addListener(controller.textChanged);
+            tabPane_container.getTabs().add(tab);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    //撤销，复制，剪切，粘贴，查找，替换，字体
+    public void menuItemUndoClick(){
+        TextInputControl textInputControl = ((EditorTabController) ((Map<?, ?>) tabPane_container.getSelectionModel().getSelectedItem().getUserData()).get("controller")).textArea_editor;
+        textInputControl.undo();
+    }
+    public void menuItemCopyClick(){
+        TextInputControl textInputControl = ((EditorTabController) ((Map<?, ?>) tabPane_container.getSelectionModel().getSelectedItem().getUserData()).get("controller")).textArea_editor;
+        textInputControl.copy();
+    }
+    public void menuItemCutClick(){
+        TextInputControl textInputControl = ((EditorTabController) ((Map<?, ?>) tabPane_container.getSelectionModel().getSelectedItem().getUserData()).get("controller")).textArea_editor;
+        textInputControl.cut();
+    }
+    public void menuItemPasteClick(){
+        TextInputControl textInputControl = ((EditorTabController) ((Map<?, ?>) tabPane_container.getSelectionModel().getSelectedItem().getUserData()).get("controller")).textArea_editor;
+        textInputControl.paste();
+    }
+    public void menuItemFindClick(){
+        TextInputControl textInputControl = ((EditorTabController) ((Map<?, ?>) tabPane_container.getSelectionModel().getSelectedItem().getUserData()).get("controller")).textArea_editor;
+
+    }
+    public void menuItemReplaceClick(){
+        TextInputControl textInputControl = ((EditorTabController) ((Map<?, ?>) tabPane_container.getSelectionModel().getSelectedItem().getUserData()).get("controller")).textArea_editor;
+        textInputControl.paste();
+    }
+
 
     /**
      * 关于按钮点击事件
@@ -200,6 +251,7 @@ public class EditContainerController implements IController {
             var controller = (EditorTabController) fxmlLoader.getController();
             var map = new HashMap<String,Object>();
             map.put("controller",controller);
+            tab.setUserData(map);
             controller.textArea_editor.textProperty().addListener(controller.textChanged);
             tabPane_container.getTabs().add(tab);
         } catch (IOException e) {

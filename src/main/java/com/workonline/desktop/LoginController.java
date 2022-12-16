@@ -69,15 +69,16 @@ public class LoginController implements IController {
         String username = tf_login_username.getText(),
                 p1 = pf_login_password.getText();
         if(test){
-            Socket socket = null;
+            Socket socket;
             PrintStream printStream = null;
             BufferedWriter bw = null;
             try {
                 socket = new Socket(InetAddress.getByName("43.138.44.240"),10099);
             } catch (IOException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.titleProperty().set("提示");
-                alert.headerTextProperty().set("网络错误");
+                alert.setTitle("提示");
+                alert.setHeaderText(null);
+                alert.setContentText("网络错误");
                 alert.showAndWait();
                 return;
             }
@@ -117,20 +118,24 @@ public class LoginController implements IController {
                 p2 = pf_password2.getText();
         if(!p1.equals(p2)){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.titleProperty().set("提示");
-            alert.headerTextProperty().set("密码不一致");
+            alert.setTitle("提示");
+            alert.setHeaderText(null);
+            alert.setContentText("密码不一致");
             alert.showAndWait();
             return;
         }
-        Socket socket = null;
+        Socket socket;
         PrintStream printStream = null;
         BufferedWriter bw = null;
         try {
             socket = new Socket(InetAddress.getByName("43.138.44.240"),10099);
+            if(!socket.isConnected())
+                throw new IOException();
         } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.titleProperty().set("提示");
-            alert.headerTextProperty().set("网络错误");
+            alert.setHeaderText(null);
+            alert.setContentText("网络错误，请检查网络");
             alert.showAndWait();
             return;
         }
@@ -174,14 +179,16 @@ public class LoginController implements IController {
         });
         MessageReceiver.r_commands.put("register_fail_id_used",(commands,message)->{
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.titleProperty().set("注册失败");
-            alert.headerTextProperty().set("用户名被使用，请更换用户名");
+            alert.setTitle("注册失败");
+            alert.setHeaderText(null);
+            alert.setContentText("用户名被使用，请更换用户名");
             alert.showAndWait();
         });
         MessageReceiver.r_commands.put("login_fail",(commands,message)->{
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.titleProperty().set("登录失败");
-            alert.headerTextProperty().set("用户名不存在，或密码错误，请重试");
+            alert.setTitle("登录失败");
+            alert.setHeaderText(null);
+            alert.setContentText("用户名不存在，或密码错误，请重试");
             alert.showAndWait();
         });
     }

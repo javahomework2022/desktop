@@ -63,5 +63,5 @@ public class MessageReceiver implements Runnable {
 }
 
 interface MessageHandle{
-    public abstract void run(String[] commands,Message message);
+    void run(String[] commands,Message message);
 }
