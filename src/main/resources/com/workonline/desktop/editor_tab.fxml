@@ -12,7 +12,7 @@
      xmlns:fx="http://javafx.com/fxml"
      styleClass="@mainstyle.css"
      fx:id="root"
-     fx:controller="com.workonline.desktop.EditorTabController" text="NewTab">
+     fx:controller="com.workonline.desktop.EditorTabController" text="NewTab" onCloseRequest="#onTabClosed">
     <AnchorPane>
         <AnchorPane AnchorPane.leftAnchor="1" AnchorPane.topAnchor="1" AnchorPane.bottomAnchor="1" prefWidth="200">
             <Pane AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.topAnchor="0" prefWidth="1" style="-fx-background-color:#dadada"/>

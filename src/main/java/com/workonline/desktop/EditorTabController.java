@@ -1,6 +1,7 @@
 package com.workonline.desktop;
 
 
+import com.workonline.util.Message;
 import com.workonline.util.Operation;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -8,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
+
+import java.util.Map;
 
 public class EditorTabController {
 
@@ -22,6 +25,18 @@ public class EditorTabController {
 
     @FXML
     public Label label_room_id,label_room_people;
+
+    public void onTabClosed(){
+        Tab tab = this.root;
+        //int roomid = ((EditorTabController) ((Map<?, ?>) tab.getUserData()).get("controller")).roomid;
+        Message message = new Message();
+        message.command = "quit_room " + roomid;
+        MessageSender.sendMessage(message);
+        EditContainerController controller = EditContainerController.getInstance();
+        controller. tabPane_container.getTabs().remove(tab);
+        controller. tab_list.remove(roomid);
+    }
+
     public ChangeListener<? super String> textChanged = new ChangeListener<String>() {
         int cnt =0;
         @Override

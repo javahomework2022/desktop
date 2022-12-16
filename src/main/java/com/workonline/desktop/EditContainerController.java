@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -21,7 +22,10 @@ import static com.workonline.desktop.StageUtils.getStage;
  * 编辑页面的主容器
  */
 public class EditContainerController implements IController {
-
+    static EditContainerController self;
+    public static EditContainerController getInstance(){
+        return self;
+    }
     String username;
 
 
@@ -47,15 +51,21 @@ public class EditContainerController implements IController {
      * @throws IOException 抛出IO异常
      */
     public EditContainerController() throws IOException {
+        self = this;
         MessageReceiver.r_commands.put("create_room_success",(commands,message)->{
             int roomid = Integer.getInteger(commands[1]);
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("editor_tab.fxml"));
             try {
                 Tab tab = fxmlLoader.load();
+                tab.setText(String.valueOf(roomid));
                 EditorTabController controller = fxmlLoader.getController();
+                controller.roomid = roomid;
                 controller.label_room_id.setText("房间ID："+roomid);
                 controller.label_room_people.setText("");
                 controller.is_owner = true;
+                var map = new HashMap<String,Object>();
+                map.put("controller",controller);
+                tab.setUserData(map);
                 tabPane_container.getTabs().add(tab);
                 tab_list.put(roomid,tab);
             } catch (IOException e) {
@@ -68,12 +78,13 @@ public class EditContainerController implements IController {
             try {
                 EditorTabController controller = fxmlLoader.getController();
                 Tab tab = fxmlLoader.load();
-                var map =new HashMap<String,Object>();
-                map.put("controller",controller);
-                tab.setUserData(map);
+                tab.setText(String.valueOf(roomid));
                 controller.roomid = roomid;
                 controller.label_room_id.setText("房间ID："+roomid);
                 controller.label_room_people.setText("");
+                var map = new HashMap<String,Object>();
+                map.put("controller",controller);
+                tab.setUserData(map);
                 tabPane_container.getTabs().add(tab);
                 tab_list.put(roomid,tab);
             } catch (IOException e) {
@@ -156,7 +167,7 @@ public class EditContainerController implements IController {
 
     public void menuItemQuitRoomClick() {
         Tab tab = tabPane_container.getSelectionModel().getSelectedItem();
-
+        if(tab == null) return;
         int roomid = ((EditorTabController) ((Map<?, ?>) tab.getUserData()).get("controller")).roomid;
         Message message = new Message();
         message.command = "quit_room " + roomid;
@@ -168,12 +179,14 @@ public class EditContainerController implements IController {
 
     public void menuItemCloseRoomClick() {
         Tab tab = tabPane_container.getSelectionModel().getSelectedItem();
+        if(tab == null) return;
         EditorTabController controller = (EditorTabController) ((Map<?, ?>) tab.getUserData()).get("controller");
         boolean is_owner = controller.is_owner;
         if(!is_owner){
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.titleProperty().set("错误");
-            alert.headerTextProperty().set("您不是房主");
+            alert.setTitle("错误");
+            alert.setContentText("您不是房主");
+            alert.setHeaderText(null);
             alert.showAndWait();
             return;
         }
@@ -242,6 +255,20 @@ public class EditContainerController implements IController {
      */
     @Override
     public void setStage(Stage stage) {
+        stage.setOnCloseRequest((e)->{
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"",new ButtonType("退出登录"),new ButtonType("取消"));
+            alert.setHeaderText(null);
+            alert.setContentText("确定退出登录？将会关闭所有房间。");
+            var ret = alert.showAndWait();
+            if(ret.isPresent() && ret.get().getText().equals("退出登录")) {
+                Message message = new Message();
+                message.command = "log_out " + username;
+                MessageSender.sendMessage(message);
+                LoginController.stage.show();
+            }else {
+                e.consume();
+            }
+        });
         this.username = ((String) ((Map<?, ?>) root.getScene().getUserData()).get("username"));
         EditContainerController.stage = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("editor_tab.fxml"));

@@ -11,9 +11,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.*;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,11 +21,14 @@ import static com.workonline.desktop.StageUtils.getStage;
  */
 public class LoginController implements IController {
 
+
+    public String username;
     public boolean logged = false;
     /**
      * 构造方法，添加本类对应的一些接收命令
      */
     public LoginController(){
+        addCommand();
     }
     /**
      * login和register页面的VBox
@@ -66,36 +66,20 @@ public class LoginController implements IController {
     @FXML
     private void btnLoginClicked() throws IOException {
         boolean test = false;
-        String username = tf_login_username.getText(),
-                p1 = pf_login_password.getText();
+        username = tf_login_username.getText();
+        String p1 = pf_login_password.getText();
         if(test){
-            Socket socket;
-            PrintStream printStream = null;
-            BufferedWriter bw = null;
-            try {
-                socket = new Socket(InetAddress.getByName("43.138.44.240"),10099);
-            } catch (IOException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("提示");
-                alert.setHeaderText(null);
-                alert.setContentText("网络错误");
-                alert.showAndWait();
-                return;
-            }
-            MessageSender.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-            new Thread(new MessageReceiver(socket)).start();
-            addCommand(username);
+            if(! MessageSender.connect()) return;
             Message message = new Message();
             message.command=String.format("login %s %s",username,p1);
             MessageSender.sendMessage(message);
-
         }else {
             HashMap<String,Object> map = new HashMap<>();
             map.put("username",username);
             Stage stage1 = getStage(1024, 600, "edit_container_view.fxml", "协同办公", 800, 480,map);
             stage1.show();
             var mainStage = (Stage) hbox_root.getScene().getWindow();
-            if (mainStage != null) mainStage.close();
+            if (mainStage != null) mainStage.hide();
         }
     }
 
@@ -113,8 +97,8 @@ public class LoginController implements IController {
      */
     @FXML
     private void btnRegisterClicked() throws IOException {
-        String username = tf_username.getText(),
-                p1 = pf_password1.getText(),
+        username = tf_username.getText();
+                String p1 = pf_password1.getText(),
                 p2 = pf_password2.getText();
         if(!p1.equals(p2)){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -124,31 +108,14 @@ public class LoginController implements IController {
             alert.showAndWait();
             return;
         }
-        Socket socket;
-        PrintStream printStream = null;
-        BufferedWriter bw = null;
-        try {
-            socket = new Socket(InetAddress.getByName("43.138.44.240"),10099);
-            if(!socket.isConnected())
-                throw new IOException();
-        } catch (IOException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.titleProperty().set("提示");
-            alert.setHeaderText(null);
-            alert.setContentText("网络错误，请检查网络");
-            alert.showAndWait();
-            return;
-        }
-        MessageSender.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-        new Thread(new MessageReceiver(socket)).start();
-        addCommand(username);
+        if(! MessageSender.connect()) return;
         Message message = new Message();
         message.command=String.format("register %s %s",username,p1);
         MessageSender.sendMessage(message);
 
     }
 
-    private void addCommand(String username) {
+    private void addCommand() {
         MessageReceiver.r_commands.put("register_success",(commands,message)->{
             Map<String,Object> map = new HashMap<>();
             map.put("username", username);
@@ -161,7 +128,7 @@ public class LoginController implements IController {
             }
             stage1.show();
             Stage mainStage = LoginController.stage;
-            if(mainStage != null)  mainStage.close();
+            if(mainStage != null)  mainStage.hide();
         });
         MessageReceiver.r_commands.put("login_success",(commands,message)->{
             Map<String,Object> map = new HashMap<>();
@@ -175,7 +142,7 @@ public class LoginController implements IController {
             }
             stage1.show();
             Stage mainStage = LoginController.stage;
-            if(mainStage != null)  mainStage.close();
+            if(mainStage != null)  mainStage.hide();
         });
         MessageReceiver.r_commands.put("register_fail_id_used",(commands,message)->{
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
