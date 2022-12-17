@@ -51,20 +51,30 @@ public class EditorTabController {
                 System.out.println(s);
                 System.out.println(t);
                 Operation operation = new Operation();
+                int current = textArea_editor.getCaretPosition();
                 int s_length = s.length(), t_length = t.length();
-                int retain_len = 0;
-                for (int i = 0; i < s_length && i < t_length; i++) {
-                    if (s.charAt(i) == t.charAt(i)) {
-                        retain_len++;
-                    }else{
-                        break;
-                    }
-                }
-                String delete_string = s.substring(retain_len);
-                String insert_string = t.substring(retain_len);
+                boolean insert = s_length <= t_length;
+                int retain_len = current;
+                if(insert)
+                    retain_len = current-1;
                 operation.retain(retain_len);
-                operation.delete(delete_string);
-                operation.insert(insert_string);
+//                for (int i = 0; i < s_length && i < t_length; i++) {
+//                    if (s.charAt(i) == t.charAt(i)) {
+//                        retain_len++;
+//                    }else{
+//                        break;
+//                    }
+//                }
+                if(insert){
+                    String insert_string = t.substring(retain_len,retain_len+1);
+                    operation.insert(insert_string);
+                    operation.retain(s_length-retain_len);
+                }
+                else {
+                    String delete_string = s.substring(retain_len,retain_len+1);
+                    operation.delete(delete_string);
+                    operation.retain(t_length-retain_len);
+                }
 //            System.out.println(operation.getOperations());
                 try {
                     clientEdit(operation);
