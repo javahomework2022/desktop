@@ -143,10 +143,12 @@ public class EditorTabController {
 //        EditContainerController editContainerController = EditContainerController.getInstance();
 //        Tab tab1 = editContainerController.tab_list.get(this.roomid);
         listen = false;
+        textArea_editor.setEditable(false);
         int current = textArea_editor.getCaretPosition();
         textArea_editor.setText(newStr.toString());
         int now = index(operation,current);
         textArea_editor.positionCaret(now);
+        textArea_editor.setEditable(true);
         listen = true;
     }
     public static int index(Operation operation,int index){
