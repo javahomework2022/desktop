@@ -1,17 +1,16 @@
 package com.workonline.desktop;
 
 import com.workonline.util.Message;
+import com.workonline.util.Text_Operation;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
@@ -60,6 +59,7 @@ public class EditContainerController implements IController {
                 tab.setText(String.valueOf(roomid));
                 EditorTabController controller = fxmlLoader.getController();
                 controller.roomid = roomid;
+                controller.version = 0;
                 controller.label_room_id.setText("房间ID："+roomid);
                 controller.label_room_people.setText("");
                 controller.is_owner = true;
@@ -83,6 +83,8 @@ public class EditContainerController implements IController {
                 tab.setText(String.valueOf(roomid));
 
                 controller.roomid = roomid;
+                controller.version = version;
+                controller.textArea_editor.setText(doc);
                 controller.label_room_id.setText("房间ID："+roomid);
                 controller.label_room_people.setText("");
                 var map = new HashMap<String,Object>();
@@ -111,6 +113,25 @@ public class EditContainerController implements IController {
             Tab tab = tab_list.get(roomid);
             tabPane_container.getTabs().remove(tab);
             tab_list.remove(roomid);
+        });
+        MessageReceiver.r_commands.put("broadcast",(commands, message) -> {
+            int roomid = Integer.getInteger(commands[1]);
+            Text_Operation textOperation = message.operation;
+            String username = textOperation.username;
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("editor_tab.fxml"));
+            try {
+                EditorTabController controller = fxmlLoader.getController();
+                if(username.equals(controller.username)  && roomid == controller.roomid)
+                {
+                    controller.serverAcknowledged();
+                }
+                else
+                {
+                    controller.applyServer(textOperation.operation);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
     }
 
