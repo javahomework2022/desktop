@@ -137,13 +137,33 @@ public class EditorTabController {
             }
         }
 //        System.out.println(newStr);
-        EditContainerController editContainerController = EditContainerController.getInstance();
-        Tab tab1 = editContainerController.tab_list.get(this.roomid);
+//        EditContainerController editContainerController = EditContainerController.getInstance();
+//        Tab tab1 = editContainerController.tab_list.get(this.roomid);
         listen = false;
-        ((EditorTabController) ((Map<?, ?>) tab1.getUserData()).get("controller")).textArea_editor.setText(newStr.toString());
+        int current = textArea_editor.getCaretPosition();
+        textArea_editor.setText(newStr.toString());
+        int now = index(operation,current);
+        textArea_editor.positionCaret(now);
         listen = true;
     }
-
+    public static int index(Operation operation,int index){
+        int newIndex = index;
+        for(AtomicOperation atomicOperation:operation.getOperations()){
+            if(atomicOperation.isRetain()){
+                index-=atomicOperation.getRetainLength();
+            }
+            else if(atomicOperation.isInsert()){
+                newIndex+=atomicOperation.getInsertString().length();
+            }
+            else{
+                newIndex-=Math.min(atomicOperation.getDeleteLength(),index);
+                index-=atomicOperation.getDeleteLength();
+            }
+            if(index<0)
+                break;
+        }
+        return newIndex;
+    }
 }
 
 abstract class Status{
