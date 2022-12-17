@@ -121,6 +121,7 @@ public class EditorTabController {
      */
     public void applyOperation(Operation operation)
     {
+        int index = 0;
         String str = textArea_editor.getText();
         StringBuilder newStr = new StringBuilder();
 //        str[0] = "hello";
@@ -130,13 +131,15 @@ public class EditorTabController {
             {
                 newStr.append(i.getInsertString());
             }
-//            else if(i.isDelete())
-//            {
-//
-//            }
+            else if(i.isDelete())
+            {
+                int len = newStr.length();
+                newStr.delete(len-i.getDeleteLength(),len);
+            }
             else if(i.isRetain())
             {
-                newStr.append(str, 0, i.getRetainLength());
+                newStr.append(str, index, i.getRetainLength());
+                index += i.getRetainLength();
             }
         }
 //        System.out.println(newStr);
@@ -204,7 +207,7 @@ class Synchronized extends Status{
     从服务器接受到了一个新的操作，这个操作能够直接应用于当前版本的客户文件
      */
     public Synchronized applyServer(EditorTabController editorTabController,Operation operation){
-       editorTabController.applyOperation(operation);
+        editorTabController.applyOperation(operation);
         return this;
     }
     /*
