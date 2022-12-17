@@ -55,8 +55,9 @@ public class EditorTabController {
                 int retain_len = 0;
                 for (int i = 0; i < s_length && i < t_length; i++) {
                     if (s.charAt(i) == t.charAt(i)) {
-                        //System.out.println(s.charAt(i)+" "+t.charAt(i));
                         retain_len++;
+                    }else{
+                        break;
                     }
                 }
                 String delete_string = s.substring(retain_len);
