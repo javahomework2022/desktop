@@ -15,6 +15,7 @@ public class MessageSender {
     public static ObjectOutputStream objectOutputStream;
     public static Socket socket;
 
+
     public static boolean connected = false;
 
     public static boolean connect() {
