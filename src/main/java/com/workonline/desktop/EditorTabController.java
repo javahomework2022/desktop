@@ -10,7 +10,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 
-import java.util.Map;
 
 public class EditorTabController {
 
@@ -28,7 +27,6 @@ public class EditorTabController {
 
     public void onTabClosed(){
         Tab tab = this.root;
-        //int roomid = ((EditorTabController) ((Map<?, ?>) tab.getUserData()).get("controller")).roomid;
         Message message = new Message();
         message.command = "quit_room " + roomid;
         MessageSender.sendMessage(message);
@@ -37,7 +35,7 @@ public class EditorTabController {
         controller. tab_list.remove(roomid);
     }
 
-    public ChangeListener<? super String> textChanged = new ChangeListener<String>() {
+    public ChangeListener<? super String> textChanged = new ChangeListener<>() {
         int cnt =0;
         @Override
         public void changed(ObservableValue<? extends String> observableValue, String s, String t) {

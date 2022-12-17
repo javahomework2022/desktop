@@ -73,12 +73,15 @@ public class EditContainerController implements IController {
             }
         });
         MessageReceiver.r_commands.put("enter_room_success",(commands, message) -> {
-            int roomid = Integer.getInteger(commands[1]);
+            int roomid = Integer.getInteger(commands[2]);
+            int version = Integer.getInteger(commands[1]);
+            String doc = message.document;
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("editor_tab.fxml"));
             try {
                 EditorTabController controller = fxmlLoader.getController();
                 Tab tab = fxmlLoader.load();
                 tab.setText(String.valueOf(roomid));
+
                 controller.roomid = roomid;
                 controller.label_room_id.setText("房间ID："+roomid);
                 controller.label_room_people.setText("");
