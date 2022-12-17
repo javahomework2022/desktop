@@ -20,7 +20,7 @@ public class MessageSender {
     public static boolean connect() {
         if (!connected) {
             try {
-                socket = new Socket(InetAddress.getByName("43.138.44.240"), 10099);
+                socket = new Socket(InetAddress.getByName("127.0.0.1"), 10099);
                 MessageSender.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
                 new Thread(new MessageReceiver(socket)).start();
                 connected = true;
@@ -45,12 +45,14 @@ public class MessageSender {
             try {
                 objectOutputStream.writeObject(message);
                 objectOutputStream.flush();
+                System.out.printf("成功发送：%s %s %s%n", message.command, message.document, message.operation);
             } catch (IOException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("错误");
                 alert.setContentText("网络错误，请重启APP");
                 alert.show();
                 e.printStackTrace();
+                System.out.printf("发送失败：%s %s %s%n", message.command, message.document, message.operation);
                 throw new RuntimeException(e);
             }
         } else {

@@ -25,7 +25,7 @@ public class EditContainerController implements IController {
     public static EditContainerController getInstance(){
         return self;
     }
-    String username;
+    public static String username;
 
 
     HashMap<Integer,Tab> tab_list = new HashMap<>();
@@ -52,7 +52,7 @@ public class EditContainerController implements IController {
     public EditContainerController() throws IOException {
         self = this;
         MessageReceiver.r_commands.put("create_room_success",(commands,message)->{
-            int roomid = Integer.getInteger(commands[1]);
+            int roomid = Integer.parseInt(commands[1]);
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("editor_tab.fxml"));
             try {
                 Tab tab = fxmlLoader.load();
@@ -63,6 +63,8 @@ public class EditContainerController implements IController {
                 controller.label_room_id.setText("房间ID："+roomid);
                 controller.label_room_people.setText("");
                 controller.is_owner = true;
+                controller.textArea_editor.setText(message.document);
+                controller.textArea_editor.textProperty().addListener(controller.textChanged);
                 var map = new HashMap<String,Object>();
                 map.put("controller",controller);
                 tab.setUserData(map);
@@ -73,20 +75,20 @@ public class EditContainerController implements IController {
             }
         });
         MessageReceiver.r_commands.put("enter_room_success",(commands, message) -> {
-            int roomid = Integer.getInteger(commands[2]);
-            int version = Integer.getInteger(commands[1]);
+            int roomid = Integer.parseInt(commands[2]);
+            int version = Integer.parseInt(commands[1]);
             String doc = message.document;
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("editor_tab.fxml"));
             try {
-                EditorTabController controller = fxmlLoader.getController();
                 Tab tab = fxmlLoader.load();
+                EditorTabController controller = fxmlLoader.getController();
                 tab.setText(String.valueOf(roomid));
-
                 controller.roomid = roomid;
                 controller.version = version;
                 controller.textArea_editor.setText(doc);
                 controller.label_room_id.setText("房间ID："+roomid);
                 controller.label_room_people.setText("");
+                controller.textArea_editor.textProperty().addListener(controller.textChanged);
                 var map = new HashMap<String,Object>();
                 map.put("controller",controller);
                 tab.setUserData(map);
@@ -109,19 +111,19 @@ public class EditContainerController implements IController {
             alert.setHeaderText(null);
             alert.setContentText("房间已被房主关闭");
             alert.showAndWait();
-            int roomid = Integer.getInteger(commands[1]);
+            int roomid = Integer.parseInt(commands[1]);
             Tab tab = tab_list.get(roomid);
             tabPane_container.getTabs().remove(tab);
             tab_list.remove(roomid);
         });
         MessageReceiver.r_commands.put("broadcast",(commands, message) -> {
-            int roomid = Integer.getInteger(commands[1]);
+            int roomid = Integer.parseInt(commands[1]);
             Text_Operation textOperation = message.operation;
             String username = textOperation.username;
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("editor_tab.fxml"));
+            Tab tab = tab_list.get(roomid);
+            EditorTabController controller  = (EditorTabController) ((Map<?,?>) tab.getUserData()).get("controller");
             try {
-                EditorTabController controller = fxmlLoader.getController();
-                if(username.equals(controller.username)  && roomid == controller.roomid)
+                if(username.equals(EditContainerController.username)  && roomid == controller.roomid)
                 {
                     controller.serverAcknowledged();
                 }
@@ -178,7 +180,7 @@ public class EditContainerController implements IController {
         if(res.isPresent()){
             String strid = res.get();
             try {
-                Integer.getInteger(strid);
+                Integer.parseInt(strid);
             }catch(Exception e) {
                 return;
             }
@@ -190,8 +192,19 @@ public class EditContainerController implements IController {
     }
 
     public void menuItemQuitRoomClick() {
+
         Tab tab = tabPane_container.getSelectionModel().getSelectedItem();
         if(tab == null) return;
+        EditorTabController controller = (EditorTabController) ((Map<?, ?>) tab.getUserData()).get("controller");
+        boolean is_owner = controller.is_owner;
+        if(is_owner){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("错误");
+            alert.setContentText("房主别想溜");
+            alert.setHeaderText(null);
+            alert.showAndWait();
+            return;
+        }
         int roomid = ((EditorTabController) ((Map<?, ?>) tab.getUserData()).get("controller")).roomid;
         Message message = new Message();
         message.command = "quit_room " + roomid;
@@ -288,6 +301,7 @@ public class EditContainerController implements IController {
                 Message message = new Message();
                 message.command = "log_out " + username;
                 MessageSender.sendMessage(message);
+                MessageSender.connected = false;
                 LoginController.stage.show();
             }else {
                 e.consume();
@@ -295,18 +309,17 @@ public class EditContainerController implements IController {
         });
         this.username = ((String) ((Map<?, ?>) root.getScene().getUserData()).get("username"));
         EditContainerController.stage = stage;
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("editor_tab.fxml"));
-
-        try {
-            Tab tab = fxmlLoader.load();
-            var controller = (EditorTabController) fxmlLoader.getController();
-            var map = new HashMap<String,Object>();
-            map.put("controller",controller);
-            tab.setUserData(map);
-            controller.textArea_editor.textProperty().addListener(controller.textChanged);
-            tabPane_container.getTabs().add(tab);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("editor_tab.fxml"));
+//        try {
+//            Tab tab = fxmlLoader.load();
+//            var controller = (EditorTabController) fxmlLoader.getController();
+//            var map = new HashMap<String,Object>();
+//            map.put("controller",controller);
+//            tab.setUserData(map);
+//            controller.textArea_editor.textProperty().addListener(controller.textChanged);
+//            tabPane_container.getTabs().add(tab);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 }

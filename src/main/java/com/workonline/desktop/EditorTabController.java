@@ -16,8 +16,8 @@ import java.util.Map;
 public class EditorTabController {
 
     int version;
-    Status status;
-    String username;
+    Status status = Synchronized.getInstance();
+
     public boolean is_owner = false;
     public int roomid = 0;
 
@@ -60,9 +60,9 @@ public class EditorTabController {
                     retain_len ++;
                 }
             }
-            String delete_string = s.substring(retain_len-1);
-            String insert_string = t.substring(retain_len-1);
-            operation.retain(retain_len-1);
+            String delete_string = s.substring(retain_len);
+            String insert_string = t.substring(retain_len);
+            operation.retain(retain_len);
             operation.delete(delete_string);
             operation.insert(insert_string);
 //            System.out.println(operation.getOperations());
@@ -107,7 +107,7 @@ public class EditorTabController {
         EditContainerController editContainerController = EditContainerController.getInstance();
         Tab tab = editContainerController.tabPane_container.getSelectionModel().getSelectedItem();
         int roomId = ((EditorTabController) ((Map<?, ?>) tab.getUserData()).get("controller")).roomid;
-        Text_Operation textOperation = new Text_Operation(version,username,operation);
+        Text_Operation textOperation = new Text_Operation(version,EditContainerController.username,operation);
         Message message = new Message();
         message.command = String.format("operation %d",roomId);
         message.operation = textOperation;

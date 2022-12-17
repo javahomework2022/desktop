@@ -47,6 +47,7 @@ public class MessageReceiver implements Runnable {
                 String command = message.command;
                 String[] commands = command.split(" ");
                 if(r_commands.containsKey(commands[0])){
+                    System.out.println("收到命令:"+command);
                     Platform.runLater(()->{
                         r_commands.get(commands[0]).run(commands,message);
                     });

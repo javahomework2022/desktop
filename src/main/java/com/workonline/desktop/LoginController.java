@@ -65,7 +65,7 @@ public class LoginController implements IController {
      */
     @FXML
     private void btnLoginClicked() throws IOException {
-        boolean test = false;
+        boolean test = true;
         username = tf_login_username.getText();
         String p1 = pf_login_password.getText();
         if(test){
