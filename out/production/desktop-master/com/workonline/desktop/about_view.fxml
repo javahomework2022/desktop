@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+<HBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.workonline.desktop.AboutController"
+      prefHeight="400.0" prefWidth="600.0" fx:id="root">
+    <padding>
+        <Insets top="40" left="40"/>
+    </padding>
+    <ImageView fitWidth="80" fitHeight="80">
+        <Image url="@icons/appicon.png"/>
+    </ImageView>
+    <VBox>
+        <HBox.margin>
+            <Insets left="40"/>
+        </HBox.margin>
+        <Label text="协同办公 (Community Version)">
+            <VBox.margin>
+                <Insets top="10" bottom="10"/>
+            </VBox.margin>
+            <font>
+                <Font size="28"/>
+            </font>
+        </Label>
+        <Label text="version 1.0 build 2022.12.5">
+            <VBox.margin>
+                <Insets top="10" bottom="10"/>
+            </VBox.margin>
+            <font>
+                <Font size="18"/>
+            </font>
+        </Label>
+        <Label fx:id="lb_runtime_info" text="runtime info">
+            <VBox.margin>
+                <Insets top="10" bottom="10"/>
+            </VBox.margin>
+            <font>
+                <Font size="18"/>
+            </font>
+        </Label>
+        <Label text="Copyright © 2022 JavaHomeWorkGroup 4">
+            <VBox.margin>
+                <Insets top="10" bottom="10"/>
+            </VBox.margin>
+            <font>
+                <Font size="18"/>
+            </font>
+        </Label>
+        <AnchorPane VBox.vgrow="ALWAYS">
+            <Button text="确定" styleClass="btn-basic" AnchorPane.rightAnchor="10" AnchorPane.bottomAnchor="40" onMouseClicked="#btn_ok_click"/>
+        </AnchorPane>
+    </VBox>
+</HBox>

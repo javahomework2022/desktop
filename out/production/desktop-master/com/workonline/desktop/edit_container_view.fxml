@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="root" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.workonline.desktop.EditContainerController">
+    <MenuBar prefHeight="30.0" prefWidth="1024.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+
+        <Menu text="房间">
+            <MenuItem text="创建房间">
+                <graphic>
+                    <ImageView fitHeight="20" fitWidth="20">
+                        <Image url="@icons/create_home.png" />
+                    </ImageView>
+                </graphic>
+            </MenuItem>
+            <SeparatorMenuItem />
+            <MenuItem text="加入房间">
+                <graphic>
+                    <ImageView fitHeight="20" fitWidth="20">
+                        <Image url="@icons/add_home.png" />
+                    </ImageView>
+                </graphic>
+            </MenuItem>
+            <SeparatorMenuItem />
+            <MenuItem text="离开房间">
+                <graphic>
+                    <ImageView fitHeight="20" fitWidth="20">
+                        <Image url="@icons/exit_home.png" />
+                    </ImageView>
+                </graphic>
+            </MenuItem>
+            <SeparatorMenuItem />
+            <MenuItem text="关闭房间">
+                <graphic>
+                    <ImageView fitHeight="20" fitWidth="20">
+                        <Image url="@icons/close.png" />
+                    </ImageView>
+                </graphic>
+            </MenuItem>
+        </Menu>
+        <Menu text="文件">
+            <MenuItem text="保存到本地">
+                <graphic>
+                    <ImageView fitHeight="20" fitWidth="20">
+                        <Image url="@icons/save.png" />
+                    </ImageView>
+                </graphic>
+            </MenuItem>
+        </Menu>
+        <Menu text="编辑">
+            <MenuItem text="撤销">
+                <graphic>
+                    <ImageView fitHeight="20" fitWidth="20">
+                        <Image url="@icons/undo.png" />
+                    </ImageView>
+                </graphic>
+            </MenuItem>
+            <SeparatorMenuItem />
+            <MenuItem text="复制">
+                <graphic>
+                    <ImageView fitHeight="20" fitWidth="20">
+                        <Image url="@icons/copy.png" />
+                    </ImageView>
+                </graphic>
+            </MenuItem>
+            <SeparatorMenuItem />
+            <MenuItem text="剪切">
+                <graphic>
+                    <ImageView fitHeight="20" fitWidth="20">
+                        <Image url="@icons/cutting.png" />
+                    </ImageView>
+                </graphic>
+            </MenuItem>
+            <SeparatorMenuItem />
+            <MenuItem text="粘贴">
+                <graphic>
+                    <ImageView fitHeight="20" fitWidth="20">
+                        <Image url="@icons/paste.png" />
+                    </ImageView>
+                </graphic>
+            </MenuItem>
+            <SeparatorMenuItem />
+            <MenuItem text="查找">
+                <graphic>
+                    <ImageView fitHeight="20" fitWidth="20">
+                        <Image url="@icons/find.png" />
+                    </ImageView>
+                </graphic>
+            </MenuItem>
+            <SeparatorMenuItem />
+            <MenuItem text="替换">
+                <graphic>
+                    <ImageView fitHeight="20" fitWidth="20">
+                        <Image url="@icons/replace.png" />
+                    </ImageView>
+                </graphic>
+            </MenuItem>
+            <SeparatorMenuItem />
+            <MenuItem text="字体">
+                <graphic>
+                    <ImageView fitHeight="20" fitWidth="20">
+                        <Image url="@icons/font.png" />
+                    </ImageView>
+                </graphic>
+            </MenuItem>
+        </Menu>
+        <Menu text="交流">
+            <MenuItem text="保存交流记录">
+                <graphic>
+                    <ImageView fitHeight="20" fitWidth="20">
+                        <Image url="@icons/save_chat.png" />
+                    </ImageView>
+                </graphic>
+            </MenuItem>
+            <SeparatorMenuItem />
+            <MenuItem text="清除历史记录">
+                <graphic>
+                    <ImageView fitHeight="20" fitWidth="20">
+                        <Image url="@icons/clear.png" />
+                    </ImageView>
+                </graphic>
+            </MenuItem>
+        </Menu>
+        <Menu text="帮助">
+            <MenuItem text="使用帮助">
+                <graphic>
+                    <ImageView fitHeight="20" fitWidth="20">
+                        <Image url="@icons/help.png" />
+                    </ImageView>
+                </graphic>
+            </MenuItem>
+            <SeparatorMenuItem />
+            <MenuItem onAction="#menuItemAboutClick" text="关于">
+                <graphic>
+                    <ImageView fitHeight="20" fitWidth="20">
+                        <Image url="@icons/about.png" />
+                    </ImageView>
+                </graphic>
+            </MenuItem>
+        </Menu>
+    </MenuBar>
+    <TabPane fx:id="tabPane_container" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="30"/>
+
+</AnchorPane>

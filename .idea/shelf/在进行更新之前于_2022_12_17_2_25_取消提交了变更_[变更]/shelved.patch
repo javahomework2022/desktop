@@ -1,0 +1,34 @@
+Index: src/main/java/com/workonline/desktop/EditorTabController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.workonline.desktop;\r\n\r\n\r\nimport com.workonline.util.Operation;\r\nimport javafx.beans.value.ChangeListener;\r\nimport javafx.beans.value.ObservableValue;\r\nimport javafx.fxml.FXML;\r\nimport javafx.scene.control.Label;\r\nimport javafx.scene.control.Tab;\r\nimport javafx.scene.control.TextArea;\r\n\r\npublic class EditorTabController {\r\n\r\n    public boolean is_owner = false;\r\n    public int roomid = 0;\r\n\r\n    @FXML\r\n    public Tab root;\r\n\r\n    @FXML\r\n    public TextArea textArea_editor;\r\n\r\n    @FXML\r\n    public Label label_room_id,label_room_people;\r\n    public ChangeListener<? super String> textChanged = new ChangeListener<String>() {\r\n        int cnt =0;\r\n        @Override\r\n        public void changed(ObservableValue<? extends String> observableValue, String s, String t) {\r\n\r\n            cnt++;\r\n            System.out.println(\"Text Changed\"+cnt);\r\n            System.out.println(s);\r\n            System.out.println(t);\r\n            Operation operation = new Operation();\r\n            int s_length = s.length(),t_length = t.length();\r\n            int retain_len=0;\r\n            for(int i=0;i<s_length && i<t_length;i++)\r\n            {\r\n                if(s.charAt(i) == t.charAt(i))\r\n                {\r\n                    //System.out.println(s.charAt(i)+\" \"+t.charAt(i));\r\n                    retain_len ++;\r\n                }\r\n            }\r\n            String delete_string = s.substring(retain_len-1);\r\n            String insert_string = t.substring(retain_len-1);\r\n            operation.retain(retain_len-1);\r\n            operation.delete(delete_string);\r\n            operation.insert(insert_string);\r\n            System.out.println(operation.getOperations());\r\n        }\r\n    };\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/workonline/desktop/EditorTabController.java b/src/main/java/com/workonline/desktop/EditorTabController.java
+--- a/src/main/java/com/workonline/desktop/EditorTabController.java	(revision c44a3855051e790bfff6900b62941a37ff8327ba)
++++ b/src/main/java/com/workonline/desktop/EditorTabController.java	(date 1671215092817)
+@@ -25,8 +25,8 @@
+     public ChangeListener<? super String> textChanged = new ChangeListener<String>() {
+         int cnt =0;
+         @Override
+-        public void changed(ObservableValue<? extends String> observableValue, String s, String t) {
+-
++        public void changed(ObservableValue<? extends String> observableValue, String s, String t)
++        {
+             cnt++;
+             System.out.println("Text Changed"+cnt);
+             System.out.println(s);
+@@ -48,7 +48,11 @@
+             operation.delete(delete_string);
+             operation.insert(insert_string);
+             System.out.println(operation.getOperations());
++
++
++            //调用clientEdit
+         }
++
+     };
+ 
+ }
+\ No newline at end of file
