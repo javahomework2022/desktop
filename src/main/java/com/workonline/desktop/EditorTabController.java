@@ -159,7 +159,7 @@ public class EditorTabController {
                 newIndex+=atomicOperation.getInsertString().length();
             }
             else{
-                newIndex-=Math.min(atomicOperation.getDeleteLength(),index);
+                newIndex-=atomicOperation.getDeleteLength();
                 index-=atomicOperation.getDeleteLength();
             }
             if(index<0)
