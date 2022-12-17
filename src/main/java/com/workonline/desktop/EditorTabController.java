@@ -118,9 +118,8 @@ public class EditorTabController {
      */
     public void applyOperation(Operation operation)
     {
-        final String[] str = new String[1];
+        String str = textArea_editor.getText();
         StringBuilder newStr = new StringBuilder();
-        ChangeListener<? super String> textChanged = (ChangeListener<String>) (observableValue, s, t) -> str[0] = s;
 //        str[0] = "hello";
         for(AtomicOperation i:operation.getOperations())
         {
@@ -134,7 +133,7 @@ public class EditorTabController {
 //            }
             else if(i.isRetain())
             {
-                newStr.append(str[0], 0, i.getRetainLength());
+                newStr.append(str, 0, i.getRetainLength());
             }
         }
 //        System.out.println(newStr);
