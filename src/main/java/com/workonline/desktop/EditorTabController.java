@@ -119,12 +119,46 @@ public class EditorTabController {
     /**
      * 将操作应用到文档中
      */
+//    public void applyOperation(Operation operation)
+//    {
+//        int index = 0;
+//        String str = textArea_editor.getText();
+//        StringBuilder newStr = new StringBuilder();
+////        str[0] = "hello";
+//        for(AtomicOperation i:operation.getOperations())
+//        {
+//            if(i.isInsert())
+//            {
+//                newStr.append(i.getInsertString());
+//            }
+//            else if(i.isDelete())
+//            {
+//                int len = newStr.length();
+//                newStr.delete(len-i.getDeleteLength(),len);
+//            }
+//            else if(i.isRetain())
+//            {
+//                newStr.append(str, index, i.getRetainLength());
+//                index += i.getRetainLength();
+//            }
+//        }
+////        System.out.println(newStr);
+////        EditContainerController editContainerController = EditContainerController.getInstance();
+////        Tab tab1 = editContainerController.tab_list.get(this.roomid);
+//        listen = false;
+//        textArea_editor.setEditable(false);
+//        int current = textArea_editor.getCaretPosition();
+//        textArea_editor.setText(newStr.toString());
+//        int now = index(operation,current);
+//        textArea_editor.positionCaret(now);
+//        textArea_editor.setEditable(true);
+//        listen = true;
+//    }
     public void applyOperation(Operation operation)
     {
         int index = 0;
         String str = textArea_editor.getText();
         StringBuilder newStr = new StringBuilder();
-//        str[0] = "hello";
         for(AtomicOperation i:operation.getOperations())
         {
             if(i.isInsert())
@@ -138,23 +172,20 @@ public class EditorTabController {
             }
             else if(i.isRetain())
             {
-                newStr.append(str, index, i.getRetainLength());
+                newStr.append(str, index, index+i.getRetainLength());
                 index += i.getRetainLength();
             }
         }
-//        System.out.println(newStr);
-//        EditContainerController editContainerController = EditContainerController.getInstance();
-//        Tab tab1 = editContainerController.tab_list.get(this.roomid);
         listen = false;
         textArea_editor.setEditable(false);
         int current = textArea_editor.getCaretPosition();
         textArea_editor.setText(newStr.toString());
-        int now = index(operation,current);
+        int now = getIndex(operation,current);
         textArea_editor.positionCaret(now);
         textArea_editor.setEditable(true);
         listen = true;
     }
-    public static int index(Operation operation,int index){
+    public static int getIndex(Operation operation, int index){
         int newIndex = index;
         for(AtomicOperation atomicOperation:operation.getOperations()){
             if(atomicOperation.isRetain()){
