@@ -109,6 +109,8 @@ public class EditorTabController {
         Message message = new Message();
         message.command = String.format("operation %d",roomId);
         message.operation = textOperation;
+        System.out.println("发送operation:version "+textOperation.version);
+        System.out.println(textOperation.operation.toString());
         MessageSender.sendMessage(message);
     }
 
