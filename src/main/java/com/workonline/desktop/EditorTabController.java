@@ -16,6 +16,7 @@ import java.util.Map;
 public class EditorTabController {
 
     int version;
+    boolean listen = true;
     Status status = Synchronized.getInstance();
 
     public boolean is_owner = false;
@@ -44,34 +45,31 @@ public class EditorTabController {
         int cnt =0;
         @Override
         public void changed(ObservableValue<? extends String> observableValue, String s, String t){
-
-            cnt++;
-            System.out.println("Text Changed"+cnt);
-            System.out.println(s);
-            System.out.println(t);
-            Operation operation = new Operation();
-            int s_length = s.length(),t_length = t.length();
-            int retain_len=0;
-            for(int i=0;i<s_length && i<t_length;i++)
-            {
-                if(s.charAt(i) == t.charAt(i))
-                {
-                    //System.out.println(s.charAt(i)+" "+t.charAt(i));
-                    retain_len ++;
+            if(listen) {
+                cnt++;
+                System.out.println("Text Changed" + cnt);
+                System.out.println(s);
+                System.out.println(t);
+                Operation operation = new Operation();
+                int s_length = s.length(), t_length = t.length();
+                int retain_len = 0;
+                for (int i = 0; i < s_length && i < t_length; i++) {
+                    if (s.charAt(i) == t.charAt(i)) {
+                        //System.out.println(s.charAt(i)+" "+t.charAt(i));
+                        retain_len++;
+                    }
                 }
-            }
-            String delete_string = s.substring(retain_len);
-            String insert_string = t.substring(retain_len);
-            operation.retain(retain_len);
-            operation.delete(delete_string);
-            operation.insert(insert_string);
+                String delete_string = s.substring(retain_len);
+                String insert_string = t.substring(retain_len);
+                operation.retain(retain_len);
+                operation.delete(delete_string);
+                operation.insert(insert_string);
 //            System.out.println(operation.getOperations());
-            try
-            {
-                clientEdit(operation);
-            } catch (Exception e)
-            {
-                e.printStackTrace();
+                try {
+                    clientEdit(operation);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
         }
@@ -142,7 +140,9 @@ public class EditorTabController {
 //        System.out.println(newStr);
         EditContainerController editContainerController = EditContainerController.getInstance();
         Tab tab1 = editContainerController.tab_list.get(this.roomid);
+        listen = false;
         ((EditorTabController) ((Map<?, ?>) tab1.getUserData()).get("controller")).textArea_editor.setText(newStr.toString());
+        listen = true;
     }
 
 }
