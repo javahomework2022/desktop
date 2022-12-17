@@ -141,11 +141,8 @@ public class EditorTabController {
         }
 //        System.out.println(newStr);
         EditContainerController editContainerController = EditContainerController.getInstance();
-        Tab tab = editContainerController.tabPane_container.getSelectionModel().getSelectedItem();
-        int roomId = ((EditorTabController) ((Map<?, ?>) tab.getUserData()).get("controller")).roomid;
-        Tab tab1 = editContainerController.tab_list.get(roomId);
-        tab1.setText(newStr.toString());
-
+        Tab tab1 = editContainerController.tab_list.get(this.roomid);
+        ((EditorTabController) ((Map<?, ?>) tab1.getUserData()).get("controller")).textArea_editor.setText(newStr.toString());
     }
 
 }

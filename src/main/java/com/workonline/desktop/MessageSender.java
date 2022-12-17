@@ -21,7 +21,7 @@ public class MessageSender {
     public static boolean connect() {
         if (!connected) {
             try {
-                socket = new Socket(InetAddress.getByName("127.0.0.1"), 10099);
+                socket = new Socket(InetAddress.getByName("43.138.44.240"), 10099);
                 MessageSender.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
                 new Thread(new MessageReceiver(socket)).start();
                 connected = true;
