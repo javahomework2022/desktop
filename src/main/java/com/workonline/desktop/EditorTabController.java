@@ -186,12 +186,12 @@ public class EditorTabController {
             }
         }
         listen = false;
-        textArea_editor.setEditable(false);
         int current = textArea_editor.getCaretPosition();
+        textArea_editor.setEditable(false);
         textArea_editor.setText(newStr.toString());
         int now = getIndex(operation,current);
-        textArea_editor.positionCaret(now);
         textArea_editor.setEditable(true);
+        textArea_editor.positionCaret(now);
         listen = true;
     }
     public static int getIndex(Operation operation, int index){
