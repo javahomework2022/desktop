@@ -69,6 +69,7 @@ public class EditContainerController implements IController {
                 map.put("controller",controller);
                 tab.setUserData(map);
                 tabPane_container.getTabs().add(tab);
+                tabPane_container.getSelectionModel().select(tab);
                 tab_list.put(roomid,tab);
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -93,6 +94,7 @@ public class EditContainerController implements IController {
                 map.put("controller",controller);
                 tab.setUserData(map);
                 tabPane_container.getTabs().add(tab);
+                tabPane_container.getSelectionModel().select(tab);
                 tab_list.put(roomid,tab);
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -183,6 +185,13 @@ public class EditContainerController implements IController {
                 Integer.parseInt(strid);
             }catch(Exception e) {
                 return;
+            }
+            if(tab_list.containsKey(Integer.parseInt(strid))){
+                Alert alert = new Alert(Alert.AlertType.ERROR,"");
+                alert.setHeaderText(null);
+                alert.setContentText("您已经在房间内，请注意");
+                alert.setTitle("提示");
+                alert.show();
             }
             Message message = new Message();
             message.command = "enter "+strid;
