@@ -155,7 +155,7 @@ public class LoginController implements IController {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("登录失败");
             alert.setHeaderText(null);
-            alert.setContentText("用户名不存在，或密码错误，请重试");
+            alert.setContentText("用户名不存在或密码错误，请重试");
             alert.showAndWait();
         });
     }

@@ -35,6 +35,7 @@ public class HelloApplication extends Application {
     public static void run(){
         launch();
         System.out.println("application exited");
+        System.exit(0);
     }
 
 }

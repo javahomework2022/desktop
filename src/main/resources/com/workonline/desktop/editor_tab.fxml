@@ -19,7 +19,7 @@
             <Label  text="交流区" AnchorPane.topAnchor="2" AnchorPane.rightAnchor="2" AnchorPane.leftAnchor="5" />
             <Pane AnchorPane.topAnchor="28" AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0" prefHeight="1" style="-fx-background-color:#dadada"/>
             <AnchorPane AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0" prefHeight="30">
-                <TextField text="" fx:id="textField_msg" AnchorPane.leftAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.topAnchor="0" AnchorPane.rightAnchor="43" prefHeight="30"/>
+                <TextField fx:id="textField_msg" onKeyReleased="#textField_msg_keyDown" AnchorPane.leftAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.topAnchor="0" AnchorPane.rightAnchor="43" prefHeight="30"/>
                 <Button onMouseClicked="#btnSendMsgClick" AnchorPane.topAnchor="0" AnchorPane.rightAnchor="2" AnchorPane.bottomAnchor="0" prefHeight="30" prefWidth="30">
                     <graphic>
                         <ImageView fitHeight="20" fitWidth="20">
@@ -41,7 +41,7 @@
             <VBox alignment="CENTER_LEFT">
                 <Label fx:id="label_room_id" text="房间ID:ID"/>
                 <Label text="房间成员："/>
-                <Label fx:id="label_room_people" text="Freeman&#x000A;Test"/>
+                <Label fx:id="label_room_people"/>
             </VBox>
         </AnchorPane>
     </AnchorPane>

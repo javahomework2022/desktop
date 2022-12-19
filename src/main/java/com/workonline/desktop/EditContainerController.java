@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
@@ -138,11 +139,11 @@ public class EditContainerController implements IController {
             }
         });
         MessageReceiver.r_commands.put("broad_msg",((commands, message) -> {
-            String sender = message.document.substring(0,message.document.indexOf(":"));
-            if(username.equals(sender)){
-                return;
-            }
-
+            AddMsg(message.document, Integer.parseInt(commands[1]));
+        }));
+        MessageReceiver.r_commands.put("current_user",((commands, message) -> {
+            Tab tab = tab_list.get(Integer.parseInt( commands[1]));
+            ((EditorTabController) ((Map<?, ?>) tab.getUserData()).get("controller")).label_room_people.setText(message.document);
         }));
     }
 
@@ -208,7 +209,6 @@ public class EditContainerController implements IController {
     }
 
     public void menuItemQuitRoomClick() {
-
         Tab tab = tabPane_container.getSelectionModel().getSelectedItem();
         if(tab == null) return;
         EditorTabController controller = (EditorTabController) ((Map<?, ?>) tab.getUserData()).get("controller");
@@ -249,56 +249,62 @@ public class EditContainerController implements IController {
         MessageSender.sendMessage(message);
     }
 
-    public void menuItemHelpClick(){
-        var res = System.getProperties();
-        for (var i : res.keySet()) {
-            System.out.println(i+":"+res.get(i));
-        }
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("editor_tab.fxml"));
 
-        try {
-            Tab tab = fxmlLoader.load();
-            var controller = (EditorTabController) fxmlLoader.getController();
-            var map = new HashMap<String,Object>();
-            map.put("controller",controller);
-            tab.setUserData(map);
-            controller.textArea_editor.textProperty().addListener(controller.textChanged);
-            tabPane_container.getTabs().add(tab);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+
+    public void menuItemHelpClick(){
     }
 
     //撤销，复制，剪切，粘贴，查找，替换，字体
     public void menuItemUndoClick(){
+        if(tabPane_container.getSelectionModel().getSelectedItem() == null) return;
         TextInputControl textInputControl = ((EditorTabController) ((Map<?, ?>) tabPane_container.getSelectionModel().getSelectedItem().getUserData()).get("controller")).textArea_editor;
         textInputControl.undo();
     }
     public void menuItemCopyClick(){
+        if(tabPane_container.getSelectionModel().getSelectedItem() == null) return;
         TextInputControl textInputControl = ((EditorTabController) ((Map<?, ?>) tabPane_container.getSelectionModel().getSelectedItem().getUserData()).get("controller")).textArea_editor;
         textInputControl.copy();
     }
     public void menuItemCutClick(){
+        if(tabPane_container.getSelectionModel().getSelectedItem() == null) return;
         TextInputControl textInputControl = ((EditorTabController) ((Map<?, ?>) tabPane_container.getSelectionModel().getSelectedItem().getUserData()).get("controller")).textArea_editor;
         textInputControl.cut();
     }
     public void menuItemPasteClick(){
+        if(tabPane_container.getSelectionModel().getSelectedItem() == null) return;;
         TextInputControl textInputControl = ((EditorTabController) ((Map<?, ?>) tabPane_container.getSelectionModel().getSelectedItem().getUserData()).get("controller")).textArea_editor;
         textInputControl.paste();
     }
-    public void menuItemFindClick(){
-        TextInputControl textInputControl = ((EditorTabController) ((Map<?, ?>) tabPane_container.getSelectionModel().getSelectedItem().getUserData()).get("controller")).textArea_editor;
 
+    public void menuItemSaveFileClick() throws IOException {
+        if(tabPane_container.getSelectionModel().getSelectedItem() == null) return;;
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("另存为");
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        fileChooser.setInitialFileName(((EditorTabController) ((Map<?, ?>) tabPane_container.getSelectionModel().getSelectedItem().getUserData()).get("controller")).roomid+".txt");
+        File file = fileChooser.showSaveDialog(stage);
+        if(file == null) return;
+        String filepath = file.getPath();
+        Path path = Path.of(filepath);
+        Files.createFile(path);
+        Files.writeString(path,((EditorTabController) ((Map<?, ?>) tabPane_container.getSelectionModel().getSelectedItem().getUserData()).get("controller")).textArea_editor.getText());
     }
-    public void menuItemReplaceClick(){
-        TextInputControl textInputControl = ((EditorTabController) ((Map<?, ?>) tabPane_container.getSelectionModel().getSelectedItem().getUserData()).get("controller")).textArea_editor;
-        textInputControl.paste();
+
+    public void menuItemFontClick(){
+        if(tabPane_container.getSelectionModel().getSelectedItem() == null) return;
+        var dialog = new FontSelectorDialog(((EditorTabController) ((Map<?, ?>) tabPane_container.getSelectionModel().getSelectedItem().getUserData()).get("controller")).textArea_editor.getFont());
+        var res = dialog.showAndWait();
+        if(res.isPresent()){
+            ((EditorTabController) ((Map<?, ?>) tabPane_container.getSelectionModel().getSelectedItem().getUserData()).get("controller")).textArea_editor.setFont(res.get());
+        }
     }
 
 
     public void AddMsg(String msg,int roomid){
-        //TextArea textInputControl = ((TextArea) ((Map<?, ?>) tabPane_container.getSelectionModel().getSelectedItem().getUserData()).get("controller")).;
-
+        Tab tab = tab_list.get(roomid);
+        TextArea textArea_chatArea = ((EditorTabController) ((Map<?, ?>) tab.getUserData()).get("controller")).textArea_chatArea;
+        textArea_chatArea.setText(textArea_chatArea.getText()+"\n"+msg);
+        textArea_chatArea.positionCaret(textArea_chatArea.getText().length());
     }
     /**
      * 关于按钮点击事件
@@ -313,6 +319,26 @@ public class EditContainerController implements IController {
     @Override
     public void setStage(Stage stage) {
         stage.setOnCloseRequest((e)->{
+
+            //检查有没有自己开的房间
+            StringBuilder lists= new StringBuilder();
+            for (Tab tab : tab_list.values()) {
+                var et = ((EditorTabController) ((Map<?, ?>) tab.getUserData()).get("controller"));
+                if(et.is_owner){
+                    lists.append(et.roomid);
+                    lists.append(" ");
+                }
+            }
+            if (!"".equals(lists.toString())) {
+                Alert nalert = new Alert(Alert.AlertType.CONFIRMATION, "提示", new ButtonType("确定"));
+                nalert.setHeaderText(null);
+                nalert.setTitle("提示");
+                nalert.setContentText(String.format("您创建的房间[%s]没有关闭，请处理后再退出", lists.toString()));
+                nalert.show();
+                e.consume();
+                return;
+            }
+            //再次提示确定登出
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"",new ButtonType("退出登录"),new ButtonType("取消"));
             alert.setHeaderText(null);
             alert.setContentText("确定退出登录？将会关闭所有房间。");
@@ -320,14 +346,19 @@ public class EditContainerController implements IController {
             if(ret.isPresent() && ret.get().getText().equals("退出登录")) {
                 Message message = new Message();
                 message.command = "log_out " + username;
-                MessageSender.sendMessage(message);
+                try {
+                    MessageSender.objectOutputStream.writeObject(message);
+                    MessageSender.objectOutputStream.flush();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
                 MessageSender.connected = false;
                 LoginController.stage.show();
             }else {
                 e.consume();
             }
         });
-        this.username = ((String) ((Map<?, ?>) root.getScene().getUserData()).get("username"));
+        username = ((String) ((Map<?, ?>) root.getScene().getUserData()).get("username"));
         EditContainerController.stage = stage;
 //        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("editor_tab.fxml"));
 //        try {

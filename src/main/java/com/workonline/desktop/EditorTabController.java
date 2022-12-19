@@ -4,11 +4,12 @@ package com.workonline.desktop;
 import com.workonline.util.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 import java.util.AbstractMap;
 import java.util.Map;
@@ -34,7 +35,16 @@ public class EditorTabController {
 
     @FXML
     public TextField textField_msg;
-    public void onTabClosed(){
+    public void onTabClosed(Event e){
+        if(is_owner){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("错误");
+            alert.setContentText("房主别想溜");
+            alert.setHeaderText(null);
+            alert.showAndWait();
+            e.consume();
+            return;
+        }
         Tab tab = this.root;
         Message message = new Message();
         message.command = "quit_room " + roomid;
@@ -54,6 +64,13 @@ public class EditorTabController {
         message.document = nmsg;
         message.command = "send_msg "+roomid;
         MessageSender.sendMessage(message);
+        textField_msg.setText("");
+    }
+
+    public void textField_msg_keyDown(KeyEvent e){
+        if(e.getCode() == KeyCode.ENTER){
+            btnSendMsgClick();
+        }
     }
     public ChangeListener<? super String> textChanged = new ChangeListener<>() {
         int cnt =0;

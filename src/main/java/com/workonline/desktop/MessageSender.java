@@ -50,7 +50,8 @@ public class MessageSender {
             } catch (IOException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("错误");
-                alert.setContentText("网络错误，请重启APP");
+                alert.setHeaderText(null);
+                alert.setContentText("网络错误，和服务器断开连接。\n请及时保存文件，然后重新登录。");
                 alert.show();
                 e.printStackTrace();
                 System.out.printf("发送失败：%s %s %s%n", message.command, message.document, message.operation);
