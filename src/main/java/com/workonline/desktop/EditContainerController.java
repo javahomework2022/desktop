@@ -10,11 +10,16 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.awt.Desktop;
+import java.util.Timer;
 
 import static com.workonline.desktop.StageUtils.getStage;
 
@@ -149,19 +154,13 @@ public class EditContainerController implements IController {
 
 
     public void menuItemCreateRoomClick() throws IOException {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"",new ButtonType("新建文件"),new ButtonType("打开现有文件"));
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"",new ButtonType("新建文档"),new ButtonType("打开现有文件"));
         alert.setHeaderText(null);
-        alert.setContentText("通过新建文件还是打开现有文件创建房间？");
+        alert.setContentText("打开现有文件或新建空白文档");
         var ret = alert.showAndWait();
-        String filepath;
-        if(ret.isPresent() && ret.get().getText().equals("新建文件")) {
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("新建文件");
-            fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-            File file = fileChooser.showSaveDialog(stage);
-            if(file == null) return;
-            filepath = file.getPath();
-            Files.createFile(Paths.get(filepath));
+        String doc;
+        if(ret.isPresent() && ret.get().getText().equals("新建文档")) {
+            doc = "";
         }else {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("选择文本文件");
@@ -172,9 +171,9 @@ public class EditContainerController implements IController {
             fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
             File file = fileChooser.showOpenDialog(stage);
             if(file == null) return;
-            filepath = file.getPath();
+            var filepath = file.getPath();
+            doc = Files.readString(Paths.get(filepath));
         }
-        String doc = Files.readString(Paths.get(filepath));
         Message message = new Message();
         message.command = "create_room";
         message.document = doc;
@@ -251,7 +250,9 @@ public class EditContainerController implements IController {
 
 
 
-    public void menuItemHelpClick(){
+    public void menuItemHelpClick() throws Exception {
+        String url = "https://github.com/javahomework2022/desktop";
+        Desktop.getDesktop().browse(new URI(url));
     }
 
     //撤销，复制，剪切，粘贴，查找，替换，字体
@@ -297,6 +298,28 @@ public class EditContainerController implements IController {
         if(res.isPresent()){
             ((EditorTabController) ((Map<?, ?>) tabPane_container.getSelectionModel().getSelectedItem().getUserData()).get("controller")).textArea_editor.setFont(res.get());
         }
+    }
+
+    public void menuItemClearChatHisClick(){
+        if(tabPane_container.getSelectionModel().getSelectedItem() == null) return;
+        ((EditorTabController) ((Map<?, ?>) tabPane_container.getSelectionModel().getSelectedItem().getUserData()).get("controller")).textArea_chatArea.clear();
+    }
+
+    public void menuItemSaveChatHisClick() throws IOException {
+        if(tabPane_container.getSelectionModel().getSelectedItem() == null) return;
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("另存为");
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        Calendar calendar = Calendar.getInstance(); // get current instance of the calendar
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy-HH:mm:ss");
+        fileChooser.setInitialFileName(((EditorTabController) ((Map<?, ?>) tabPane_container.getSelectionModel().getSelectedItem().getUserData()).get("controller")).roomid+formatter.format(calendar.getTime())+"chat.txt");
+        File file = fileChooser.showSaveDialog(stage);
+        if(file == null) return;
+        String filepath = file.getPath();
+        Path path = Path.of(filepath);
+        Files.createFile(path);
+        Files.writeString(path,((EditorTabController) ((Map<?, ?>) tabPane_container.getSelectionModel().getSelectedItem().getUserData()).get("controller")).textArea_chatArea.getText());
+
     }
 
 

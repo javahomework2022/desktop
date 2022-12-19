@@ -91,7 +91,7 @@
 <!--                </graphic>-->
 <!--            </MenuItem>-->
 <!--            <SeparatorMenuItem />-->
-<!--            <MenuItem text="替换">-->
+<!--            <MenuItem text="替换" onAction="">-->
 <!--                <graphic>-->
 <!--                    <ImageView fitHeight="20" fitWidth="20">-->
 <!--                        <Image url="@icons/replace.png" />-->
@@ -108,7 +108,7 @@
             </MenuItem>
         </Menu>
         <Menu text="交流">
-            <MenuItem text="保存交流记录">
+            <MenuItem text="保存交流记录" onAction="#menuItemSaveChatHisClick">
                 <graphic>
                     <ImageView fitHeight="20" fitWidth="20">
                         <Image url="@icons/save_chat.png" />
@@ -116,7 +116,7 @@
                 </graphic>
             </MenuItem>
             <SeparatorMenuItem />
-            <MenuItem text="清除历史记录">
+            <MenuItem text="清除历史记录" onAction="#menuItemClearChatHisClick">
                 <graphic>
                     <ImageView fitHeight="20" fitWidth="20">
                         <Image url="@icons/clear.png" />
