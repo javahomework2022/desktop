@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
 import java.util.AbstractMap;
 import java.util.Map;
@@ -26,11 +27,13 @@ public class EditorTabController {
     public Tab root;
 
     @FXML
-    public TextArea textArea_editor;
+    public TextArea textArea_editor,textArea_chatArea;
 
     @FXML
     public Label label_room_id,label_room_people;
 
+    @FXML
+    public TextField textField_msg;
     public void onTabClosed(){
         Tab tab = this.root;
         Message message = new Message();
@@ -41,6 +44,17 @@ public class EditorTabController {
         controller. tab_list.remove(roomid);
     }
 
+    public void btnSendMsgClick(){
+        String msg = textField_msg.getText();
+        if(msg.isBlank() || msg.isEmpty()){
+            return;
+        }
+        String nmsg = EditContainerController.username+":"+msg;
+        Message message = new Message();
+        message.document = nmsg;
+        message.command = "send_msg "+roomid;
+        MessageSender.sendMessage(message);
+    }
     public ChangeListener<? super String> textChanged = new ChangeListener<>() {
         int cnt =0;
         @Override

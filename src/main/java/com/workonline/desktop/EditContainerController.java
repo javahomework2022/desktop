@@ -137,6 +137,13 @@ public class EditContainerController implements IController {
                 e.printStackTrace();
             }
         });
+        MessageReceiver.r_commands.put("broad_msg",((commands, message) -> {
+            String sender = message.document.substring(0,message.document.indexOf(":"));
+            if(username.equals(sender)){
+                return;
+            }
+
+        }));
     }
 
 
@@ -289,6 +296,10 @@ public class EditContainerController implements IController {
     }
 
 
+    public void AddMsg(String msg,int roomid){
+        //TextArea textInputControl = ((TextArea) ((Map<?, ?>) tabPane_container.getSelectionModel().getSelectedItem().getUserData()).get("controller")).;
+
+    }
     /**
      * 关于按钮点击事件
      */
