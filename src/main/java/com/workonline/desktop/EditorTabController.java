@@ -51,30 +51,34 @@ public class EditorTabController {
                 System.out.println(s);
                 System.out.println(t);
                 Operation operation = new Operation();
-                int current = textArea_editor.getCaretPosition();
+                int head_retain_len = 0;
+                int tail_retain_len = 0;
                 int s_length = s.length(), t_length = t.length();
-                boolean insert = s_length <= t_length;
-                int retain_len = current;
-                if(insert)
-                    retain_len = current-1;
-                operation.retain(retain_len);
-//                for (int i = 0; i < s_length && i < t_length; i++) {
-//                    if (s.charAt(i) == t.charAt(i)) {
-//                        retain_len++;
-//                    }else{
-//                        break;
-//                    }
-//                }
-                if(insert){
-                    String insert_string = t.substring(retain_len,retain_len+1);
-                    operation.insert(insert_string);
-                    operation.retain(s_length-retain_len);
+                for (int i = 0; i < s_length && i < t_length; i++) {
+                    if (s.charAt(i) == t.charAt(i)) {
+                        head_retain_len++;
+                    }else{
+                        break;
+                    }
                 }
-                else {
-                    String delete_string = s.substring(retain_len,retain_len+1);
+                operation.retain(head_retain_len);
+                for(int i = s_length-1,j = t_length-1; i>=head_retain_len&&j>=head_retain_len; i--,j--){
+                    if(s.charAt(i) == t.charAt(j)){
+                        tail_retain_len++;
+                    }
+                    else{
+                        break;
+                    }
+                }
+                if(head_retain_len+tail_retain_len<s_length){
+                    String delete_string = s.substring(head_retain_len,s_length-tail_retain_len);
                     operation.delete(delete_string);
-                    operation.retain(t_length-retain_len);
                 }
+                if(head_retain_len+tail_retain_len<t_length){
+                    String insert_string = t.substring(head_retain_len,t_length-tail_retain_len);
+                    operation.insert(insert_string);
+                }
+                operation.retain(tail_retain_len);
 //            System.out.println(operation.getOperations());
                 try {
                     clientEdit(operation);
