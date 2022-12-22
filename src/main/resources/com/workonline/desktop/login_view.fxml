@@ -15,7 +15,7 @@
                 <Insets top="80.0" />
             </VBox.margin>
         </Label>
-        <Label text="java大作业展示，或者放个口号?">
+        <Label text="不要爆零小组OOP大作业">
             <font>
                 <Font name="Yuanti SC Regular" size="12.0" />
             </font>
