@@ -38,6 +38,13 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.workonline.util</groupId>
+            <artifactId>workonline-util</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/../util/out/artifacts/util_jar/util.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <build>
