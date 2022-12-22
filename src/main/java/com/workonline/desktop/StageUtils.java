@@ -13,17 +13,18 @@ import java.util.Objects;
  */
 public class StageUtils {
     /**
-     *获取stage
-     * @param width stage的宽度
-     * @param height 高度
-     * @param xmlpath xml文件地址
-     * @param title 标题
-     * @param minWidth 最小宽度
+     * 获取stage
+     *
+     * @param width     stage的宽度
+     * @param height    高度
+     * @param xmlpath   xml文件地址
+     * @param title     标题
+     * @param minWidth  最小宽度
      * @param minHeight 最小高度
      * @return 生成的stage
      * @throws IOException 抛出异常
      */
-    public static Stage getStage (int width,int height,String xmlpath,String title,int minWidth,int minHeight) throws IOException {
+    public static Stage getStage(int width, int height, String xmlpath, String title, int minWidth, int minHeight) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(xmlpath));
         Scene scene = new Scene(fxmlLoader.load(), width, height);
 
@@ -35,32 +36,34 @@ public class StageUtils {
         stage.setScene(scene);
         stage.setMinHeight(minHeight);
         stage.setMinWidth(minWidth);
-        return  stage;
+        return stage;
     }
 
     /**
      * 生成没有最小高度和宽度的stage
-     * @param width 宽度
-     * @param height 高度
+     *
+     * @param width   宽度
+     * @param height  高度
      * @param xmlpath xml文件地址
-     * @param title 标题
+     * @param title   标题
      * @return stage
      * @throws IOException 抛出异常
      */
-    public static Stage getStage(int width,int height,String xmlpath,String title) throws IOException{
-        return getStage(width, height, xmlpath, title,0,0);
+    public static Stage getStage(int width, int height, String xmlpath, String title) throws IOException {
+        return getStage(width, height, xmlpath, title, 0, 0);
     }
 
+
     /**
-     * 带数据传入的获取窗口
-     * @param width
-     * @param height
-     * @param xmlpath
-     * @param title
-     * @param minWidth
-     * @param minHeight
-     * @param userdata 要传入的数据
-     * @return
+     * @param width 宽度
+     * @param height 高度
+     * @param xmlpath xml文件路径
+     * @param title 标题
+     * @param minWidth 最小宽度
+     * @param minHeight 最小高度
+     * @param userdata 用户数据
+     * @return 窗口
+     * @throws IOException 抛出异常
      */
     public static Stage getStage(int width, int height, String xmlpath, String title, int minWidth, int minHeight, Map userdata) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(xmlpath));

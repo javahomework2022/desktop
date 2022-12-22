@@ -9,10 +9,11 @@ import javafx.scene.text.Font;
 public class Program {
     /**
      * 程序的主入口
+     *
      * @param args 入口参数
      */
     public static void main(String[] args) {
-        Font font = Font.loadFont(HelloApplication.class.getResourceAsStream("fonts/Miui-Regular.ttf"),12);
+        Font font = Font.loadFont(HelloApplication.class.getResourceAsStream("fonts/Miui-Regular.ttf"), 12);
         System.out.println(font);
         HelloApplication.run();
     }

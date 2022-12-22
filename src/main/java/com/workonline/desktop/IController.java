@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 public interface IController {
     /**
      * 添加Controller对应的stage
+     *
      * @param stage 对应的stage
      */
     void setStage(Stage stage);

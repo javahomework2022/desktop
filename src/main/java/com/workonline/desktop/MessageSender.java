@@ -12,12 +12,24 @@ import java.net.Socket;
  * 这个类是个静态类，负责和服务器沟通。
  */
 public class MessageSender {
+    /**
+     * 输出流
+     */
     public static ObjectOutputStream objectOutputStream;
+    /**
+     * socket对象
+     */
     public static Socket socket;
 
-
+    /**
+     * 是否和服务器连接
+     */
     public static boolean connected = false;
 
+
+    /**
+     * @return 是否连接成功
+     */
     public static boolean connect() {
         if (!connected) {
             try {
@@ -35,11 +47,14 @@ public class MessageSender {
                 alert.showAndWait();
                 return false;
             }
-        }else {
+        } else {
             return true;
         }
     }
 
+    /**
+     * @param message 消息
+     */
     public static void sendMessage(Message message) {
 
         if (objectOutputStream != null) {
